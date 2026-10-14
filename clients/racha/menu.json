@@ -4,8 +4,8 @@
   "name_en": "Racha",
   "tagline": "Ресторан грузинской кухни у ВДНХ",
   "tagline_en": "Georgian cuisine near VDNKh",
-  "logo": "logo.svg",
-  "_logo_note": "монограмма в цветах страницы: фирменный логотип получить не удалось",
+  "logo": "logo.png",
+  "_logo_note": "вырезан со скриншота kafe-racha.ru",
   "theme": "warm",
   "defaultLang": "ru",
   "currency": "₽",
@@ -287,5 +287,8 @@
         }
       ]
     }
-  ]
+  ],
+  "logoStyle": "wide",
+  "accentColor": "#d0472f",
+  "_accent_note": "фирменный красно-оранжевый kafe-racha.ru (#dd5a42), чуть затемнён для читаемости белого текста на кнопках"
 }

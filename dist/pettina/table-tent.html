@@ -129,7 +129,7 @@
   --font-display: "PT Serif", Georgia, "Times New Roman", serif;
   --slug: 0mm;   /* поле под метки реза вокруг обрезного формата */
   --bleed: 0mm; /* вылеты фона за линию реза */
-  --surface: #1c1c1e; --text: #f2efe9; --muted: #a39e95; --line: #2d2d30; --chip: #262628; --accent: #dcae5b; 
+  --surface: #1c1c1e; --text: #f2efe9; --muted: #a39e95; --line: #2d2d30; --chip: #262628; --accent: #dcae5b; --accent: #c08a5a;
 }
 
 * { box-sizing: border-box; }
@@ -238,6 +238,14 @@ body {
   flex: none;
 }
 
+.brand img.brand__wide {
+  width: auto;
+  max-width: 60mm;
+  height: 18mm;
+  border-radius: 0;
+  object-fit: contain;
+}
+
 .brand__name {
   font: 700 13pt/1.15 var(--font-display);
   text-align: left;
@@ -331,7 +339,7 @@ body {
 
 <section class="plate"><div class="bleed"></div><div class="sheet">
   <div class="brand">
-    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI2MCIgZmlsbD0iIzFjMWMxZSIvPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjUzIiBmaWxsPSJub25lIiBzdHJva2U9IiNkY2FlNWIiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIuNyIvPgogIDx0ZXh0IHg9IjYwIiB5PSI2MCIgZHk9Ii4zNWVtIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSwgJ1BUIFNlcmlmJywgJ1RpbWVzIE5ldyBSb21hbicsIHNlcmlmIiBmb250LXNpemU9IjU4IiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iLTEiIGZpbGw9IiNkY2FlNWIiPtCfPC90ZXh0Pgo8L3N2Zz4K" alt="">
+    <img src="logo.png" alt="">
     <div class="brand__name">Петтина</div>
   </div>
   <div class="cta">
@@ -346,7 +354,7 @@ body {
 </div></section>
 <section class="plate"><div class="bleed"></div><div class="sheet">
   <div class="brand">
-    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI2MCIgZmlsbD0iIzFjMWMxZSIvPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjUzIiBmaWxsPSJub25lIiBzdHJva2U9IiNkY2FlNWIiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIuNyIvPgogIDx0ZXh0IHg9IjYwIiB5PSI2MCIgZHk9Ii4zNWVtIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSwgJ1BUIFNlcmlmJywgJ1RpbWVzIE5ldyBSb21hbicsIHNlcmlmIiBmb250LXNpemU9IjU4IiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iLTEiIGZpbGw9IiNkY2FlNWIiPtCfPC90ZXh0Pgo8L3N2Zz4K" alt="">
+    <img src="logo.png" alt="">
     <div class="brand__name">Петтина</div>
   </div>
   <div class="cta">

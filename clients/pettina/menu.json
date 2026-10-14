@@ -3,8 +3,8 @@
   "name": "Петтина",
   "name_en": "Pettina",
   "tagline": "Кафе-бар · шашлык на углях",
-  "logo": "logo.svg",
-  "_logo_note": "монограмма в цветах страницы: фирменный логотип получить не удалось",
+  "logo": "logo.png",
+  "_logo_note": "знак вырезан со скриншота pettina.ru, на кремовом круге (иначе коричневый не виден на тёмной теме)",
   "theme": "dark",
   "currency": "₽",
   "phone": "+7 (495) 686-55-31",
@@ -228,5 +228,7 @@
   },
   "tagline_en": "Café-bar · charcoal-grilled shashlik",
   "address_en": "2A Kosmonavtov St, Moscow",
-  "defaultLang": "ru"
+  "defaultLang": "ru",
+  "accentColor": "#c08a5a",
+  "_accent_note": "фирменный коричневый pettina.ru (#553619), осветлён для тёмной темы"
 }

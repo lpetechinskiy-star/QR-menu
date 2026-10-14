@@ -596,7 +596,9 @@ function renderPage({ slug, cfg, url, config, clientDir, outDir, templates, them
   /* ---- Логотип ---- */
   const logoSrc = useAsset(slug, clientDir, outDir, cfg.logo, { inlineSvg: true });
   const logo = logoSrc
-    ? `<img class="hero__logo" src="${esc(logoSrc)}" alt="" width="96" height="96" decoding="async">`
+    ? cfg.logoStyle === 'wide'
+      ? `<img class="hero__logo hero__logo--wide" src="${esc(logoSrc)}" alt="${esc(cfg.name)}" decoding="async">`
+      : `<img class="hero__logo" src="${esc(logoSrc)}" alt="" width="96" height="96" decoding="async">`
     : '';
 
   /* ---- Кнопки действий ---- */
@@ -832,6 +834,7 @@ ${cards.join('\n')}
     langSwitch,
     logo,
     name: f(cfg, 'name'),
+    nameClass: cfg.logoStyle === 'wide' && logoSrc ? ' visually-hidden' : '',
     tagline: isFilled(cfg.tagline) ? `<p class="hero__tagline">${f(cfg, 'tagline')}</p>` : '',
     actions: actions.length ? `<div class="actions">${actions.join('')}</div>` : '',
     nav,
@@ -892,8 +895,8 @@ async function renderTent({ slug, cfg, url, clientDir, outDir, templates, themes
   const name = r.plain(cfg, 'name');
   const page = `
   <div class="brand">
-    ${logoSrc ? `<img src="${esc(logoSrc)}" alt="">` : ''}
-    <div class="brand__name">${esc(name)}</div>
+    ${logoSrc ? `<img${cfg.logoStyle === 'wide' ? ' class="brand__wide"' : ''} src="${esc(logoSrc)}" alt="">` : ''}
+    ${cfg.logoStyle === 'wide' && logoSrc ? '' : `<div class="brand__name">${esc(name)}</div>`}
   </div>
   <div class="cta">
     <div class="cta__title">${t('tentMenu')}</div>
