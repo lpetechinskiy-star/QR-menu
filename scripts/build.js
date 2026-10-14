@@ -45,6 +45,7 @@ const UI = {
     call: 'Позвонить',
     book: 'Забронировать',
     message: 'Написать',
+    addToCart: 'Добавить в «Мой выбор»',
     route: 'Маршрут',
     navInfo: 'Инфо',
     info: 'Информация',
@@ -73,6 +74,7 @@ const UI = {
     call: 'Call',
     book: 'Book a table',
     message: 'Message us',
+    addToCart: 'Add to My order',
     route: 'Directions',
     navInfo: 'Info',
     info: 'Information',
@@ -652,6 +654,28 @@ function renderPage({ slug, cfg, url, config, clientDir, outDir, templates, them
     );
   }
 
+  /* ---- «Мой выбор»: корзина на фронтенде ---- */
+  const cartEnabled = cfg.cart !== false;
+  let cartConfig = '';
+  if (cartEnabled) {
+    const via = ['telegram', 'whatsapp'].includes(cfg.orderVia) ? cfg.orderVia : null;
+    if (isFilled(cfg.orderVia) && !via) warn(slug, `orderVia "${cfg.orderVia}" — нужно telegram или whatsapp`);
+    if (via && !isFilled(cfg.orderContact)) warn(slug, 'orderVia задан, но нет orderContact — отправка в чат отключена');
+    const endpoint = isFilled(cfg.orderEndpoint) && /^https:\/\//i.test(cfg.orderEndpoint) ? cfg.orderEndpoint : null;
+    if (isFilled(cfg.orderEndpoint) && !endpoint) warn(slug, 'orderEndpoint должен начинаться с https://');
+    const data = {
+      slug,
+      name: cfg.name,
+      cur: currency,
+      curBefore: /^[$€£]$/.test(currency),
+      endpoint,
+      via: via && isFilled(cfg.orderContact) ? via : null,
+      contact: via && isFilled(cfg.orderContact) ? String(cfg.orderContact).trim() : null,
+    };
+    // </script> внутри JSON невозможен: экранируем «<».
+    cartConfig = `<script type="application/json" id="cart-cfg">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
+  }
+
   /* ---- Разделы меню ---- */
   const usedIds = new Set(['info']);
   const sections = cfg.sections.map((section, i) => {
@@ -668,7 +692,15 @@ function renderPage({ slug, cfg, url, config, clientDir, outDir, templates, them
 
   const sectionsHtml = sections
     .map(({ section, id }) => {
-      const items = section.items.map((item) => renderDish(item)).join('\n');
+      const dishIds = new Set();
+      const items = section.items
+        .map((item, j) => {
+          let dishId = `${id}--${slugify(item.name_en || item.name) || j + 1}`;
+          while (dishIds.has(dishId)) dishId += `-${j + 1}`;
+          dishIds.add(dishId);
+          return renderDish(item, dishId);
+        })
+        .join('\n');
       const note = isFilled(section.note) ? `<p class="section__note">${f(section, 'note')}</p>` : '';
       // action: { label, label_en, type, value } — кнопка под разделом («Заказать в Telegram»).
       let action = '';
@@ -692,8 +724,27 @@ ${action}
     })
     .join('\n');
 
-  function renderDish(item) {
+  function renderDish(item, dishId) {
     const out = item.available === false;
+    // В «Мой выбор» можно добавить блюдо с числовой ценой (или с вариантами с числовыми ценами).
+    const variants = Array.isArray(item.variants) && item.variants.length ? item.variants : null;
+    const cartable =
+      cartEnabled &&
+      !out &&
+      (variants ? variants.every((v) => typeof v.price === 'number') : typeof item.price === 'number');
+    let cartAttrs = '';
+    if (cartable) {
+      cartAttrs =
+        ` data-id="${esc(dishId)}" data-name="${esc(item.name)}"` +
+        (isFilled(item.name_en) ? ` data-name-en="${esc(item.name_en)}"` : '') +
+        (variants
+          ? ` data-variants="${esc(
+              JSON.stringify(
+                variants.map((v) => ({ n: v.name || '', ne: v.name_en || unitsToEn(v.name || ''), p: v.price }))
+              )
+            )}"`
+          : ` data-price="${item.price}"`);
+    }
     const meta = [];
     if (isFilled(item.weight)) {
       meta.push(`<span>${tx(item.weight, item.weight_en || unitsToEn(item.weight))}</span>`);
@@ -718,13 +769,16 @@ ${action}
       ? `<img class="dish__photo" src="${esc(photoSrc)}" alt="${esc(r.plain(item, 'name'))}" width="96" height="96" loading="lazy" decoding="async">`
       : '';
 
-    return `<li class="dish${out ? ' is-out' : ''}">
+    const add = cartable
+      ? `<div class="qty" data-qty><button type="button" class="add" data-add aria-label="${esc(UI[r.lang].addToCart)}">+</button></div>`
+      : '';
+    return `<li class="dish${out ? ' is-out' : ''}"${cartAttrs}>
 <div class="dish__body">
 <h3 class="dish__name">${f(item, 'name')}</h3>
 ${isFilled(item.description) ? `<p class="dish__desc">${f(item, 'description')}</p>` : ''}
 <div class="dish__meta">${meta.join('')}</div>
 </div>
-<div class="dish__side">${photo}${price}</div>
+<div class="dish__side">${photo}${add ? `<div class="dish__buy${variants ? ' dish__buy--col' : ''}">${price}${add}</div>` : price}</div>
 </li>`;
   }
 
@@ -857,6 +911,7 @@ ${cards.join('\n')}
     favicon: logoSrc ? `<link rel="icon" href="${esc(logoSrc)}">` : '',
     css: minifyCss(css),
     js: minifyJs(templates.js),
+    cartConfig,
     icons: iconSprite(),
     langSwitch,
     logo,
