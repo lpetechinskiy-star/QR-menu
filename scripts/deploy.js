@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /*
  * Деплой меню кафе на хостинг:
- *   npm run deploy -- demo-cafe
+ *   npm run deploy -- demo-cafe            — одно кафе
+ *   npm run deploy -- racha pettina        — несколько кафе одним коммитом
+ *   npm run deploy -- --all                — все кафе из clients/
  *
  * Перед деплоем кафе пересобирается. Хостинг задаётся в config.json → deploy.provider:
  *   github-pages — кладёт dist/<кафе>/ в ветку gh-pages (остальные кафе в ветке не трогает),
@@ -63,23 +65,31 @@ function rootIndex() {
 }
 
 function parseArgs(argv) {
-  const opts = { slug: null, build: true, dryRun: false, provider: null, remote: null };
+  const opts = { slugs: [], all: false, build: true, dryRun: false, provider: null, remote: null };
   for (const a of argv) {
     if (a === '--no-build') opts.build = false;
     else if (a === '--dry-run') opts.dryRun = true;
     else if (a.startsWith('--provider=')) opts.provider = a.slice(11);
     else if (a.startsWith('--remote=')) opts.remote = a.slice(9);
+    else if (a === '--all') opts.all = true;
     else if (a.startsWith('--')) throw new BuildError(`неизвестный флаг ${a}`);
-    else if (!opts.slug) opts.slug = a.replace(/[\\/]+$/, '').replace(/^(clients|dist)[\\/]/, '');
-    else throw new BuildError('за один раз деплоится одно кафе');
+    else opts.slugs.push(a.replace(/[\\/]+$/, '').replace(/^(clients|dist)[\\/]/, ''));
   }
-  if (!opts.slug) throw new BuildError('укажите кафе: npm run deploy -- demo-cafe');
+  if (opts.all) {
+    opts.slugs = fs
+      .readdirSync(CLIENTS, { withFileTypes: true })
+      .filter((d) => d.isDirectory() && fs.existsSync(path.join(CLIENTS, d.name, 'menu.json')))
+      .map((d) => d.name);
+  }
+  if (!opts.slugs.length) throw new BuildError('укажите кафе: npm run deploy -- demo-cafe (или --all)');
   return opts;
 }
 
 /* ---------------- GitHub Pages ---------------- */
 
-function deployGithubPages(slug, config, opts) {
+// Все кафе уходят одним коммитом: иначе GitHub Pages отменяет промежуточные сборки
+// и сайт обновляется только после последней из них.
+function deployGithubPages(slugs, config, opts) {
   const settings = (config.deploy && config.deploy.githubPages) || {};
   const remote = opts.remote || settings.remote || 'origin';
   const branch = settings.branch || 'gh-pages';
@@ -100,8 +110,10 @@ function deployGithubPages(slug, config, opts) {
       git(tmp, ['remote', 'add', 'origin', remoteUrl]);
     }
 
-    fs.rmSync(path.join(tmp, slug), { recursive: true, force: true });
-    copyDir(path.join(DIST, slug), path.join(tmp, slug));
+    for (const slug of slugs) {
+      fs.rmSync(path.join(tmp, slug), { recursive: true, force: true });
+      copyDir(path.join(DIST, slug), path.join(tmp, slug));
+    }
     fs.writeFileSync(path.join(tmp, '.nojekyll'), '');
 
     // CNAME привязывает свой домен. Без customDomain файла быть не должно,
@@ -121,7 +133,7 @@ function deployGithubPages(slug, config, opts) {
     // Автор коммита — как в основном репозитории (или нейтральный, если не настроен).
     const name = git(ROOT, ['config', 'user.name'], { allowFail: true }).stdout.trim() || 'QR-menu deploy';
     const email = git(ROOT, ['config', 'user.email'], { allowFail: true }).stdout.trim() || 'deploy@localhost';
-    git(tmp, ['-c', `user.name=${name}`, '-c', `user.email=${email}`, 'commit', '--quiet', '-m', `Deploy ${slug}`]);
+    git(tmp, ['-c', `user.name=${name}`, '-c', `user.email=${email}`, 'commit', '--quiet', '-m', `Deploy ${slugs.join(', ')}`]);
 
     if (opts.dryRun) {
       console.log(`✓ Dry run: коммит подготовлен в ${tmp}, push пропущен`);
@@ -137,7 +149,7 @@ function deployGithubPages(slug, config, opts) {
 
 /* ---------------- Netlify ---------------- */
 
-function deployNetlify(slug, config, opts) {
+function deployNetlify(slugs, config, opts) {
   const settings = (config.deploy && config.deploy.netlify) || {};
   const siteId = process.env.NETLIFY_SITE_ID || settings.siteId;
   if (!siteId) throw new BuildError('не задан Netlify siteId (config.json → deploy.netlify.siteId или NETLIFY_SITE_ID)');
@@ -159,7 +171,7 @@ function deployNetlify(slug, config, opts) {
     copyDir(DIST, tmp);
     fs.writeFileSync(path.join(tmp, 'index.html'), rootIndex());
 
-    const args = ['--yes', 'netlify-cli@27', 'deploy', '--dir', tmp, '--prod', '--site', siteId, '--message', `Deploy ${slug}`];
+    const args = ['--yes', 'netlify-cli@27', 'deploy', '--dir', tmp, '--prod', '--site', siteId, '--message', `Deploy ${slugs.join(', ')}`];
     if (opts.dryRun) {
       console.log(`✓ Dry run: подготовлено в ${tmp}\n  npx ${args.join(' ')}`);
       return;
@@ -181,20 +193,22 @@ function main() {
   const provider = opts.provider || (config.deploy && config.deploy.provider) || 'github-pages';
 
   if (opts.build) {
-    const res = spawnSync(process.execPath, [path.join(__dirname, 'build.js'), opts.slug], { stdio: 'inherit' });
+    const res = spawnSync(process.execPath, [path.join(__dirname, 'build.js'), ...opts.slugs], { stdio: 'inherit' });
     if (res.status !== 0) throw new BuildError('сборка не удалась — деплой отменён');
   }
-  if (!fs.existsSync(path.join(DIST, opts.slug, 'index.html'))) {
-    throw new BuildError(`нет dist/${opts.slug}/index.html — сначала соберите: npm run build -- ${opts.slug}`);
+  for (const slug of opts.slugs) {
+    if (!fs.existsSync(path.join(DIST, slug, 'index.html'))) {
+      throw new BuildError(`нет dist/${slug}/index.html — сначала соберите: npm run build -- ${slug}`);
+    }
   }
 
-  console.log(`\nДеплой ${opts.slug} → ${provider}`);
-  if (provider === 'github-pages') deployGithubPages(opts.slug, config, opts);
-  else if (provider === 'netlify') deployNetlify(opts.slug, config, opts);
+  console.log(`\nДеплой ${opts.slugs.join(', ')} → ${provider}`);
+  if (provider === 'github-pages') deployGithubPages(opts.slugs, config, opts);
+  else if (provider === 'netlify') deployNetlify(opts.slugs, config, opts);
   else throw new BuildError(`неизвестный provider "${provider}" (github-pages или netlify)`);
 
   const base = siteBaseUrl(config);
-  if (base && !opts.dryRun) console.log(`  ${base}/${encodeURIComponent(opts.slug)}/`);
+  if (base && !opts.dryRun) for (const slug of opts.slugs) console.log(`  ${base}/${encodeURIComponent(slug)}/`);
 }
 
 try {
