@@ -1,0 +1,288 @@
+{
+  "_note": "Сайт kafe-racha.ru недоступен из среды сборки — данные из поисковых выдержек его страниц. Цены сверить с актуальным меню.",
+  "name": "Рача",
+  "name_en": "Racha",
+  "tagline": "Ресторан грузинской кухни у ВДНХ",
+  "tagline_en": "Georgian cuisine near VDNKh",
+  "logo": "logo.svg",
+  "_logo_note": "заглушка: монограмма, не фирменный логотип",
+  "theme": "warm",
+  "defaultLang": "ru",
+  "currency": "₽",
+  "phone": "+7 (495) 232-44-35",
+  "_phone_source": "справочник tomesto.ru — сверить",
+  "booking": {
+    "type": "whatsapp",
+    "value": "+79936135099"
+  },
+  "address": "Москва, ул. Константинова, 11А",
+  "address_en": "11A Konstantinova St, Moscow",
+  "hours": [
+    {
+      "days": "Ежедневно",
+      "days_en": "Daily",
+      "time": "12:00–23:00"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Хинкали",
+      "title_en": "Khinkali",
+      "note": "Цена за 1 шт. Минимальный заказ — 3 шт. одного вида",
+      "note_en": "Price per piece. Minimum 3 pcs of one kind",
+      "items": [
+        {
+          "name": "Хинкали из говядины и свинины",
+          "name_en": "Beef & pork khinkali",
+          "weight": "1 шт.",
+          "price": 110,
+          "tags": [
+            "hit"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Хинкали из баранины",
+          "name_en": "Lamb khinkali",
+          "weight": "1 шт.",
+          "price": 130,
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Хинкали с сыром сулугуни",
+          "name_en": "Suluguni cheese khinkali",
+          "weight": "1 шт.",
+          "price": 70,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Хинкали с картофелем",
+          "name_en": "Potato khinkali",
+          "weight": "1 шт.",
+          "price": 70,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        }
+      ]
+    },
+    {
+      "title": "Хачапури",
+      "title_en": "Khachapuri",
+      "items": [
+        {
+          "name": "Хачапури по-аджарски",
+          "name_en": "Adjarian khachapuri",
+          "description": "Лодочка с сыром и яйцом",
+          "description_en": "Boat-shaped bread with cheese and egg",
+          "weight": "350 г",
+          "price": 620,
+          "tags": [
+            "hit",
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Хачапури по-имеретински",
+          "name_en": "Imeretian khachapuri",
+          "description": "Закрытая лепёшка с имеретинским сыром",
+          "description_en": "Closed flatbread with Imeretian cheese",
+          "weight": "450 г",
+          "price": 640,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        }
+      ]
+    },
+    {
+      "title": "Салаты",
+      "title_en": "Salads",
+      "items": [
+        {
+          "name": "Тёплый салат «Рача»",
+          "name_en": "Warm Racha salad",
+          "description": "Нежная телятина, стручковая фасоль, болгарский перец",
+          "description_en": "Tender veal, green beans, bell pepper",
+          "weight": "180 г",
+          "price": 740,
+          "tags": [
+            "hit"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Салат из свежих овощей",
+          "name_en": "Fresh vegetable salad",
+          "description": "Томаты, огурцы, красный лук, зелень",
+          "description_en": "Tomatoes, cucumbers, red onion, herbs",
+          "price": 550,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Мангал-салат",
+          "name_en": "Mangal salad",
+          "description": "Овощи, запечённые на углях",
+          "description_en": "Charcoal-roasted vegetables",
+          "price": 440,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        }
+      ]
+    },
+    {
+      "title": "Холодные закуски",
+      "title_en": "Cold starters",
+      "items": [
+        {
+          "name": "Ассорти из пхали",
+          "name_en": "Pkhali platter",
+          "description": "Три вида пхали",
+          "description_en": "Three kinds of pkhali",
+          "weight": "300 г",
+          "price": 860,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Пхали из стручковой фасоли",
+          "name_en": "Green bean pkhali",
+          "weight": "150 г",
+          "price": 470,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Пхали из свёклы",
+          "name_en": "Beetroot pkhali",
+          "weight": "150 г",
+          "price": 470,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Пхали из шпината",
+          "name_en": "Spinach pkhali",
+          "weight": "150 г",
+          "price": 470,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Баклажаны с грецким орехом",
+          "name_en": "Eggplant rolls with walnuts",
+          "price": 540,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Соленья",
+          "name_en": "Pickles",
+          "description": "Огурцы, чеснок, помидоры, острый перец",
+          "description_en": "Cucumbers, garlic, tomatoes, hot pepper",
+          "price": 690,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        }
+      ]
+    },
+    {
+      "title": "Супы",
+      "title_en": "Soups",
+      "items": [
+        {
+          "name": "Харчо",
+          "name_en": "Kharcho",
+          "price": 530,
+          "tags": [
+            "spicy"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Суп из баранины",
+          "name_en": "Lamb soup",
+          "weight": "250 мл",
+          "price": 570,
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Грибной крем-суп",
+          "name_en": "Mushroom cream soup",
+          "weight": "250 г",
+          "price": 470,
+          "tags": [
+            "veg"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Уха из сёмги",
+          "name_en": "Salmon fish soup",
+          "weight": "300 г",
+          "price": 640,
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Борщ",
+          "name_en": "Borscht",
+          "price": 520,
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        }
+      ]
+    },
+    {
+      "title": "Блюда на мангале",
+      "title_en": "From the grill",
+      "items": [
+        {
+          "name": "Шашлык из свинины",
+          "name_en": "Pork shashlik",
+          "weight": "150 г",
+          "price": 690,
+          "tags": [
+            "hit"
+          ],
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Люля-кебаб из свинины и телятины",
+          "name_en": "Pork & veal lula kebab",
+          "weight": "150 г",
+          "price": 790,
+          "_source": "kafe-racha.ru (выдержка поиска)"
+        },
+        {
+          "name": "Каре ягнёнка",
+          "name_en": "Rack of lamb",
+          "weight": "180 г",
+          "price": 1060,
+          "_source": "kafe-racha.ru, цена точки «Абель» (Мытищи) — сверить"
+        }
+      ]
+    }
+  ]
+}

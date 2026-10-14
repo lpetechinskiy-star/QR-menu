@@ -277,6 +277,14 @@ main {
 
 .dish + .dish { border-top: 1px solid var(--line); }
 
+/* Кнопка под разделом: «Заказать в Telegram» и т. п. */
+.section__action {
+  flex-direction: row;
+  min-height: 52px;
+  margin-top: 12px;
+  font-size: 15px;
+}
+
 .dish__name {
   margin: 0 0 4px;
   font-size: 17px;
@@ -386,6 +394,7 @@ main {
 .card__title .icon { width: 18px; height: 18px; color: var(--accent); }
 
 .card p { margin: 0; }
+.card .card__note { margin-top: 6px; color: var(--muted); font-size: 14px; }
 
 /* Бейдж «Открыто сейчас / Закрыто» */
 .status {

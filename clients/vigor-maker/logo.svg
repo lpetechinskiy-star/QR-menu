@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <circle cx="60" cy="60" r="60" fill="#151515"/>
+  <circle cx="60" cy="60" r="52" fill="none" stroke="#c8a165" stroke-width="2"/>
+  <text x="60" y="72" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="38" font-weight="800" letter-spacing="1" fill="#f2efe9">VM</text>
+  <rect x="38" y="82" width="44" height="3" rx="1.5" fill="#c8a165"/>
+</svg>

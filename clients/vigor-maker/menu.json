@@ -1,0 +1,186 @@
+{
+  "_note": "Яндекс Карты недоступны из среды сборки: подтверждены только капучино, раф и латте «Пармезан»; остальные цены — заглушки.",
+  "name": "Vigor Maker",
+  "name_en": "Vigor Maker",
+  "tagline": "Кофейня в главной арке ВДНХ · кофе с собой",
+  "tagline_en": "Coffee to go in the VDNKh main arch",
+  "logo": "logo.svg",
+  "_logo_note": "заглушка",
+  "theme": "dark",
+  "defaultLang": "ru",
+  "currency": "₽",
+  "contact": {
+    "type": "telegram",
+    "value": "https://t.me/vigormaker"
+  },
+  "address": "Москва, проспект Мира, 119с227",
+  "address_en": "119 bld 227 Prospekt Mira, Moscow",
+  "addressNote": "Главная арка ВДНХ, инфоцентр",
+  "addressNote_en": "VDNKh main entrance arch, info centre",
+  "hours": [
+    {
+      "days": "Пн–Пт",
+      "days_en": "Mon–Fri",
+      "time": "08:30–21:00"
+    },
+    {
+      "days": "Сб–Вс",
+      "days_en": "Sat–Sun",
+      "time": "10:00–21:00"
+    }
+  ],
+  "socials": {
+    "telegram": "https://t.me/vigormaker"
+  },
+  "sections": [
+    {
+      "title": "Классика",
+      "title_en": "Classics",
+      "items": [
+        {
+          "name": "Эспрессо",
+          "name_en": "Espresso",
+          "weight": "30 мл",
+          "price": 180,
+          "_stub": true
+        },
+        {
+          "name": "Американо",
+          "name_en": "Americano",
+          "weight": "250 мл",
+          "price": 220,
+          "_stub": true
+        },
+        {
+          "name": "Капучино",
+          "name_en": "Cappuccino",
+          "description": "На фермерском молоке",
+          "description_en": "Made with farm milk",
+          "weight": "150 мл",
+          "price": 260,
+          "_source": "Яндекс Карты (выдержка поиска)"
+        },
+        {
+          "name": "Флэт уайт",
+          "name_en": "Flat white",
+          "weight": "200 мл",
+          "price": 290,
+          "_stub": true
+        },
+        {
+          "name": "Латте",
+          "name_en": "Latte",
+          "weight": "300 мл",
+          "price": 290,
+          "_stub": true
+        },
+        {
+          "name": "Раф",
+          "name_en": "Raf",
+          "description": "Сливочно-кофейный: ваниль, лаванда, масала или цитрус",
+          "description_en": "Creamy coffee: vanilla, lavender, masala or citrus",
+          "weight": "260 мл",
+          "price": 350,
+          "_source": "Яндекс Карты (выдержка поиска)"
+        }
+      ]
+    },
+    {
+      "title": "Авторские напитки",
+      "title_en": "Signature drinks",
+      "items": [
+        {
+          "name": "Латте «Пармезан»",
+          "name_en": "Parmesan latte",
+          "description": "Пудра из пармезана, розмарин и сахар — вкус ванильных сырников",
+          "description_en": "Parmesan powder, rosemary and sugar — tastes like vanilla cheesecakes",
+          "weight": "280 мл",
+          "price": 390,
+          "tags": [
+            "hit"
+          ],
+          "_source": "Яндекс Карты (выдержка поиска)"
+        },
+        {
+          "name": "Лавандовый раф",
+          "name_en": "Lavender raf",
+          "weight": "260 мл",
+          "price": 350,
+          "_source": "Яндекс Карты (выдержка поиска) (цена рафа)"
+        },
+        {
+          "name": "Масала-латте",
+          "name_en": "Masala latte",
+          "description": "Пряная смесь масала, эспрессо, молоко",
+          "description_en": "Masala spice blend, espresso, milk",
+          "weight": "300 мл",
+          "price": 350,
+          "tags": [
+            "spicy"
+          ],
+          "_stub": true
+        },
+        {
+          "name": "Ванильный латте на кокосовом молоке",
+          "name_en": "Vanilla coconut milk latte",
+          "weight": "300 мл",
+          "price": 370,
+          "tags": [
+            "vegan"
+          ],
+          "_stub": true
+        }
+      ]
+    },
+    {
+      "title": "Десерты",
+      "title_en": "Desserts",
+      "items": [
+        {
+          "name": "Фисташковая картошка",
+          "name_en": "Pistachio kartoshka cake",
+          "description": "Классическое пирожное с фисташкой",
+          "description_en": "Classic Russian truffle cake with pistachio",
+          "price": 250,
+          "_stub": true
+        },
+        {
+          "name": "Шоколадная картошка",
+          "name_en": "Chocolate kartoshka cake",
+          "description": "Классическое пирожное с какао",
+          "description_en": "Classic Russian truffle cake with cocoa",
+          "price": 230,
+          "_stub": true
+        }
+      ]
+    },
+    {
+      "title": "Зерно своей обжарки",
+      "title_en": "Our own roasted beans",
+      "note": "Обжариваем сами. Закажите пачку в Telegram — подготовим к вашему приходу",
+      "note_en": "Roasted in-house. Order a bag via Telegram and we'll have it ready",
+      "action": {
+        "label": "Заказать в Telegram",
+        "label_en": "Order via Telegram",
+        "type": "telegram",
+        "value": "https://t.me/vigormaker"
+      },
+      "items": [
+        {
+          "name": "Зерно для эспрессо",
+          "name_en": "Espresso roast",
+          "weight": "250 г",
+          "price": 1100,
+          "_stub": true
+        },
+        {
+          "name": "Зерно для фильтра",
+          "name_en": "Filter roast",
+          "weight": "250 г",
+          "price": 1200,
+          "_stub": true
+        }
+      ]
+    }
+  ]
+}

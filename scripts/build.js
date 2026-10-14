@@ -44,6 +44,7 @@ const UI = {
   ru: {
     call: 'Позвонить',
     book: 'Забронировать',
+    message: 'Написать',
     route: 'Маршрут',
     navInfo: 'Инфо',
     info: 'Информация',
@@ -71,6 +72,7 @@ const UI = {
   en: {
     call: 'Call',
     book: 'Book a table',
+    message: 'Message us',
     route: 'Directions',
     navInfo: 'Info',
     info: 'Information',
@@ -300,9 +302,9 @@ function pageUrl(slug, cfg, baseUrl) {
 function bookingHref(slug, booking) {
   if (!booking) return null;
   if (typeof booking === 'string') return safeUrl(booking);
+  if (!isFilled(booking.type) && !isFilled(booking.value)) return null;
   const value = String(booking.value ?? '').trim();
   if (!value) {
-    warn(slug, 'booking: не заполнено поле "value" — кнопка «Забронировать» скрыта');
     return null;
   }
   const isUrl = /^https?:\/\//i.test(value);
@@ -603,9 +605,17 @@ function renderPage({ slug, cfg, url, config, clientDir, outDir, templates, them
     actions.push(`<a class="btn" href="${esc(telHref(cfg.phone))}">${icon('phone')}${ui('call')}</a>`);
   }
   const booking = bookingHref(slug, cfg.booking);
+  if (cfg.booking && !booking) warn(slug, 'booking: не заполнено или неверно — кнопка «Забронировать» скрыта');
   if (booking) {
     actions.push(
       `<a class="btn btn--primary" href="${esc(booking)}"${linkAttrs(booking)}>${icon('calendar')}${ui('book')}</a>`
+    );
+  }
+  // contact: { type, value } — кнопка «Написать» (например, Telegram), если брони нет.
+  const contact = bookingHref(slug, cfg.contact);
+  if (contact) {
+    actions.push(
+      `<a class="btn${booking ? '' : ' btn--primary'}" href="${esc(contact)}"${linkAttrs(contact)}>${icon('chat')}${ui('message')}</a>`
     );
   }
   const maps = mapLinks(cfg);
@@ -633,12 +643,24 @@ function renderPage({ slug, cfg, url, config, clientDir, outDir, templates, them
     .map(({ section, id }) => {
       const items = section.items.map((item) => renderDish(item)).join('\n');
       const note = isFilled(section.note) ? `<p class="section__note">${f(section, 'note')}</p>` : '';
+      // action: { label, label_en, type, value } — кнопка под разделом («Заказать в Telegram»).
+      let action = '';
+      if (section.action) {
+        const href = bookingHref(slug, section.action);
+        if (href) {
+          const text = isFilled(section.action.label) ? f(section.action, 'label') : ui('book');
+          action = `<a class="section__action btn btn--primary" href="${esc(href)}"${linkAttrs(href)}>${icon('chat')}${text}</a>`;
+        } else {
+          warn(slug, `раздел «${section.title}»: у кнопки не задан value — кнопка скрыта до заполнения`);
+        }
+      }
       return `<section class="section" id="${id}">
 <h2 class="section__title">${f(section, 'title')}</h2>
 ${note}
 <ul class="list">
 ${items}
 </ul>
+${action}
 </section>`;
     })
     .join('\n');
@@ -704,8 +726,9 @@ ${isFilled(item.description) ? `<p class="dish__desc">${f(item, 'description')}<
     const pills = maps
       .map((m) => `<a class="pill" href="${esc(m.url)}"${linkAttrs(m.url)}>${icon('route')}${ui(m.key)}</a>`)
       .join('');
+    const addressNote = isFilled(cfg.addressNote) ? `<p class="card__note">${f(cfg, 'addressNote')}</p>` : '';
     cards.push(
-      `<div class="card"><h3 class="card__title">${icon('pin')}${ui('address')}</h3><p>${f(cfg, 'address')}</p>${pills ? `<div class="pills">${pills}</div>` : ''}</div>`
+      `<div class="card"><h3 class="card__title">${icon('pin')}${ui('address')}</h3><p>${f(cfg, 'address')}</p>${addressNote}${pills ? `<div class="pills">${pills}</div>` : ''}</div>`
     );
   }
 

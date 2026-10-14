@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <circle cx="60" cy="60" r="60" fill="#8c2f1b"/>
+  <circle cx="60" cy="60" r="51" fill="none" stroke="#f3dfc1" stroke-width="2" opacity=".6"/>
+  <path d="M60 22c6 8 6 14 0 20-6-6-6-12 0-20z" fill="#f3dfc1"/>
+  <text x="60" y="88" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="700" fill="#f3dfc1">Рача</text>
+</svg>
