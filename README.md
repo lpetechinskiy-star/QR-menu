@@ -4,7 +4,7 @@
 Без фреймворков: чистый HTML + CSS + немного JS, всё встроено в один файл (~40 КБ). Страница быстро открывается и рассчитана в первую очередь на телефон.
 
 ```
-config.json                 общие настройки: адрес сайта, ссылка «Сделано SaintSites», деплой
+config.json                 общие настройки: адрес сайта, свой домен, ссылка «Сделано SaintSites», деплой
 clients/<кафе>/menu.json    данные кафе (+ логотип и фото рядом)
 templates/                  шаблоны страницы и тейбл-тента, шрифты для печати
 scripts/                    build (сборка), new (новое кафе), preview (локальный сервер), deploy
@@ -25,7 +25,7 @@ npm run build -- demo-cafe --open   # собрать пример и откры�
 npm run new -- coffee-point          # 1. копирует пример в clients/coffee-point/
 #                                      2. правим clients/coffee-point/menu.json, кладём свой логотип
 npm run build -- coffee-point        # 3. собираем → dist/coffee-point/
-npm run deploy -- coffee-point       # 4. публикуем → https://menu.saintsites.ru/coffee-point/
+npm run deploy -- coffee-point       # 4. публикуем → https://lpetechinskiy-star.github.io/QR-menu/coffee-point/
 ```
 
 `npm run build` без имени собирает все кафе. `npm run preview` поднимает локальный сервер (http://localhost:8080), открыть можно и с телефона в той же сети.
@@ -45,13 +45,18 @@ npm run deploy -- coffee-point       # 4. публикуем → https://menu.sa
 
 ```json
 {
-  "baseUrl": "https://menu.saintsites.ru",
+  "baseUrl": "https://lpetechinskiy-star.github.io/QR-menu",
+  "customDomain": "",
   "credit": { "name": "SaintSites", "url": "https://saintsites.ru" },
   "deploy": { "provider": "github-pages", "githubPages": { "remote": "origin", "branch": "gh-pages" }, "netlify": { "siteId": "" } }
 }
 ```
 
-Адрес кафе — `<baseUrl>/<папка-кафе>/`. От него строятся QR-код, `og:url` и canonical. Если у кафе свой домен, укажите в его `menu.json` поле `"url"`.
+Адрес кафе — `<адрес сайта>/<папка-кафе>/`. От него строятся QR-код, `og:url` и canonical.
+
+- Пока своего домена нет, адрес сайта — `baseUrl` (GitHub Pages: `https://<логин>.github.io/<репозиторий>`).
+- **Свой домен — одной правкой:** `"customDomain": "menu.saintsites.ru"`. Тогда адрес сайта — `https://menu.saintsites.ru`, а деплой кладёт в `gh-pages` файл `CNAME`. Пустой `customDomain` — `CNAME` удаляется. После смены домена пересоберите и передеплойте кафе: в QR-кодах и тейбл-тентах новый адрес, их нужно перепечатать.
+- Если у отдельного кафе свой адрес, укажите в его `menu.json` поле `"url"`.
 
 ## menu.json
 
@@ -89,9 +94,11 @@ npm run deploy -- coffee-point       # 4. публикуем → https://menu.sa
 
 `npm run deploy -- <кафе>` пересобирает кафе и публикует его. Файлы для печати (`table-tent*`) на хостинг не попадают. Флаги: `--dry-run` (всё подготовить, но не публиковать), `--no-build`, `--provider=netlify`.
 
-**GitHub Pages** (`"provider": "github-pages"`, по умолчанию). Скрипт кладёт `dist/<кафе>/` в ветку `gh-pages` того же репозитория — другие кафе в ветке не трогаются, — и добавляет `CNAME` с доменом из `baseUrl`. Один раз настроить:
-1. Задеплоить первое кафе — появится ветка `gh-pages`.
-2. GitHub → Settings → Pages → Source: *Deploy from a branch*, ветка `gh-pages`, папка `/ (root)`. Custom domain: `menu.saintsites.ru`, включить *Enforce HTTPS*.
-3. В DNS домена `saintsites.ru`: запись `CNAME` `menu` → `<ваш-логин>.github.io`.
+**GitHub Pages** (`"provider": "github-pages"`, по умолчанию). Скрипт кладёт `dist/<кафе>/` в ветку `gh-pages` того же репозитория — другие кафе в ветке не трогаются. Один раз настроить: GitHub → Settings → Pages → Source: *Deploy from a branch*, ветка `gh-pages`, папка `/ (root)`.
+
+Подключить свой домен позже:
+1. В DNS домена: запись `CNAME` `menu` → `<логин>.github.io` (проверка: `dig +short menu.saintsites.ru`).
+2. В `config.json`: `"customDomain": "menu.saintsites.ru"`, затем `npm run deploy -- <кафе>` для каждого кафе.
+3. GitHub → Settings → Pages: дождаться «DNS check successful» и включить *Enforce HTTPS*.
 
 **Netlify** (`"provider": "netlify"`). Netlify заменяет сайт целиком, поэтому публикуется весь `dist/` — все собранные кафе сразу. Нужны `siteId` (в `config.json` или `NETLIFY_SITE_ID`) и токен в переменной `NETLIFY_AUTH_TOKEN` (Netlify → User settings → Applications → Personal access tokens). Домен `menu.saintsites.ru` подключается в настройках сайта на Netlify.

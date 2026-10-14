@@ -5,7 +5,8 @@
  *
  * Перед деплоем кафе пересобирается. Хостинг задаётся в config.json → deploy.provider:
  *   github-pages — кладёт dist/<кафе>/ в ветку gh-pages (остальные кафе в ветке не трогает),
- *                  добавляет CNAME из baseUrl. Нужен доступ на push в репозиторий.
+ *                  пишет CNAME, если в config.json задан customDomain (иначе удаляет его).
+ *                  Нужен доступ на push в репозиторий.
  *   netlify      — публикует весь dist/ (Netlify заменяет сайт целиком).
  *                  Нужны NETLIFY_AUTH_TOKEN и siteId (в config.json или NETLIFY_SITE_ID).
  *
@@ -23,7 +24,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { spawnSync } = require('child_process');
-const { loadConfig, BuildError } = require('./build');
+const { loadConfig, customDomain, siteBaseUrl, BuildError } = require('./build');
 
 const ROOT = path.resolve(__dirname, '..');
 const DIST = path.join(ROOT, 'dist');
@@ -48,15 +49,16 @@ function copyDir(src, dest) {
   fs.cpSync(src, dest, { recursive: true, filter: (p) => !isPrintFile(path.basename(p)) });
 }
 
-/** Корневая страница домена: если её нет — просто редирект на сайт студии. */
-function rootIndex(config) {
-  const target = (config.credit && config.credit.url) || 'https://saintsites.ru';
+/** Корневая страница сайта: нейтральная заглушка (список кафе не раскрываем). */
+function rootIndex() {
   return `<!doctype html>
 <html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<meta http-equiv="refresh" content="0; url=${target}">
 <title>QR-меню</title></head>
-<body><a href="${target}">${target}</a></body></html>
+<body style="font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;margin:0;color:#555">
+<p>Отсканируйте QR-код на столе, чтобы открыть меню.</p>
+</body></html>
 `;
 }
 
@@ -102,9 +104,13 @@ function deployGithubPages(slug, config, opts) {
     copyDir(path.join(DIST, slug), path.join(tmp, slug));
     fs.writeFileSync(path.join(tmp, '.nojekyll'), '');
 
-    const host = config.baseUrl ? new URL(config.baseUrl).hostname : null;
-    if (host && !host.endsWith('github.io')) fs.writeFileSync(path.join(tmp, 'CNAME'), host + '\n');
-    if (!fs.existsSync(path.join(tmp, 'index.html'))) fs.writeFileSync(path.join(tmp, 'index.html'), rootIndex(config));
+    // CNAME привязывает свой домен. Без customDomain файла быть не должно,
+    // иначе GitHub будет перенаправлять *.github.io на несуществующий домен.
+    const domain = customDomain(config);
+    const cname = path.join(tmp, 'CNAME');
+    if (domain) fs.writeFileSync(cname, domain + '\n');
+    else fs.rmSync(cname, { force: true });
+    fs.writeFileSync(path.join(tmp, 'index.html'), rootIndex());
 
     git(tmp, ['add', '--all']);
     if (git(tmp, ['diff', '--cached', '--quiet'], { allowFail: true }).status === 0) {
@@ -151,7 +157,7 @@ function deployNetlify(slug, config, opts) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'qr-menu-netlify-'));
   try {
     copyDir(DIST, tmp);
-    if (!fs.existsSync(path.join(tmp, 'index.html'))) fs.writeFileSync(path.join(tmp, 'index.html'), rootIndex(config));
+    fs.writeFileSync(path.join(tmp, 'index.html'), rootIndex());
 
     const args = ['--yes', 'netlify-cli@27', 'deploy', '--dir', tmp, '--prod', '--site', siteId, '--message', `Deploy ${slug}`];
     if (opts.dryRun) {
@@ -187,9 +193,8 @@ function main() {
   else if (provider === 'netlify') deployNetlify(opts.slug, config, opts);
   else throw new BuildError(`неизвестный provider "${provider}" (github-pages или netlify)`);
 
-  if (config.baseUrl && !opts.dryRun) {
-    console.log(`  ${String(config.baseUrl).replace(/\/*$/, '/')}${encodeURIComponent(opts.slug)}/`);
-  }
+  const base = siteBaseUrl(config);
+  if (base && !opts.dryRun) console.log(`  ${base}/${encodeURIComponent(opts.slug)}/`);
 }
 
 try {

@@ -6,10 +6,11 @@
  *   npm run build -- demo-cafe         — собрать одно кафе
  *   npm run build -- demo-cafe --open  — собрать и открыть в браузере
  *
- * Адрес страницы: <baseUrl из config.json>/<папка-кафе>/ (от него строятся QR и og:url).
+ * Адрес страницы: <адрес сайта>/<папка-кафе>/ (от него строятся QR и og:url).
+ * Адрес сайта: https://<customDomain>, если он задан в config.json, иначе baseUrl.
  *
  * Флаги:
- *   --base-url=https://...  — временно заменить baseUrl из config.json
+ *   --base-url=https://...  — временно заменить адрес сайта из config.json
  *   --no-pdf                — не делать PDF тейбл-тентов
  *   --open                  — открыть готовую страницу в браузере
  *
@@ -270,7 +271,25 @@ function loadConfig() {
   }
 }
 
-/** Публичный адрес страницы кафе: <baseUrl>/<папка>/ (или явный "url" в menu.json). */
+/** Свой домен из config.json ("menu.site.ru" или "https://menu.site.ru") → "menu.site.ru" или null. */
+function customDomain(config) {
+  if (!isFilled(config.customDomain)) return null;
+  const raw = String(config.customDomain).trim();
+  try {
+    return new URL(/^https?:\/\//i.test(raw) ? raw : `https://${raw}`).hostname;
+  } catch (e) {
+    throw new BuildError(`customDomain "${raw}" — нужен домен вида menu.site.ru`);
+  }
+}
+
+/** Адрес сайта: https://<customDomain>, если задан, иначе baseUrl. */
+function siteBaseUrl(config) {
+  const domain = customDomain(config);
+  if (domain) return `https://${domain}`;
+  return isFilled(config.baseUrl) ? String(config.baseUrl).trim().replace(/\/+$/, '') : null;
+}
+
+/** Публичный адрес страницы кафе: <адрес сайта>/<папка>/ (или явный "url" в menu.json). */
 function pageUrl(slug, cfg, baseUrl) {
   if (isFilled(cfg.url)) return String(cfg.url).trim();
   if (!isFilled(baseUrl)) return null;
@@ -984,7 +1003,7 @@ async function main() {
   };
   const themes = parseThemes(templates.css);
   const config = loadConfig();
-  const baseUrl = opts.baseUrl || config.baseUrl;
+  const baseUrl = opts.baseUrl || siteBaseUrl(config);
 
   const slugs = opts.slugs.length
     ? opts.slugs
@@ -1063,4 +1082,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { loadConfig, pageUrl, parseDays, parseTime, parseSchedule, bookingHref, BuildError };
+module.exports = { loadConfig, customDomain, siteBaseUrl, pageUrl, parseDays, parseTime, parseSchedule, bookingHref, BuildError };
