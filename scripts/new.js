@@ -27,11 +27,6 @@ if (fs.existsSync(dest)) {
 
 fs.cpSync(src, dest, { recursive: true });
 
-const file = path.join(dest, 'menu.json');
-const menu = JSON.parse(fs.readFileSync(file, 'utf8'));
-menu.url = String(menu.url || '').replace(/[^/]+\/?$/, `${slug}/`);
-fs.writeFileSync(file, JSON.stringify(menu, null, 2) + '\n');
-
 console.log(`✓ Создано: clients/${slug}/`);
 console.log('  1. Отредактируйте clients/' + slug + '/menu.json и замените logo.svg');
 console.log('  2. Соберите: npm run build -- ' + slug);

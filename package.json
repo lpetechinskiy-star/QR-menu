@@ -7,12 +7,17 @@
   "scripts": {
     "build": "node scripts/build.js",
     "new": "node scripts/new.js",
-    "preview": "node scripts/preview.js"
+    "preview": "node scripts/preview.js",
+    "deploy": "node scripts/deploy.js"
   },
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
+    "pdf-lib": "^1.17.1",
     "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1"
   }
 }

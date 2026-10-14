@@ -6,13 +6,19 @@
 <meta name="robots" content="noindex, nofollow">
 <title>{{title}}</title>
 <style>
-/* Тейбл-тент A6 (105 × 148 мм). Две одинаковые стороны — для «домика» на стол.
-   Печать: Ctrl+P → размер бумаги A6 (или «По размеру страницы»), поля «Нет», фон — включить. */
-@page { size: 105mm 148mm; margin: 0; }
+/* Тейбл-тент A6 (105 × 148 мм), две одинаковые стороны — для «домика» на стол.
+   Генератор делает две версии:
+   • table-tent.html / .pdf — для домашней печати: ровно A6, без вылетов;
+   • table-tent-print.html / .pdf — для типографии: фон с вылетами 3 мм и метки реза. */
+@page { size: {{pageW}} {{pageH}}; margin: 0; }
+
+{{fonts}}
 
 :root {
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: "PT Serif", Georgia, "Times New Roman", serif;
+  --slug: {{slug}};   /* поле под метки реза вокруг обрезного формата */
+  --bleed: {{bleed}}; /* вылеты фона за линию реза */
   {{vars}}
 }
 
@@ -47,33 +53,55 @@ body {
   border-radius: 999px;
   background: #1d1c1a;
   color: #fff;
-  font: 600 14px/1 var(--font);
+  font: 700 14px/1 var(--font);
   cursor: pointer;
 }
 
-.sheet {
+/* Лист печати: обрезной формат + вылеты + поле с метками */
+.plate {
   position: relative;
+  width: calc(105mm + 2 * var(--slug));
+  height: calc(148mm + 2 * var(--slug));
+  margin: 0 auto 10mm;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, .18);
+  break-after: page;
+  page-break-after: always;
+}
+
+.plate:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+
+.bleed {
+  position: absolute;
+  inset: calc(var(--slug) - var(--bleed));
+  background: var(--surface);
+}
+
+.marks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sheet {
+  position: absolute;
+  top: var(--slug);
+  left: var(--slug);
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 105mm;
   height: 148mm;
-  margin: 0 auto 10mm;
   padding: 8mm 8mm 7mm;
-  overflow: hidden;
-  background: var(--surface);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, .18);
   text-align: center;
-  break-after: page;
-  page-break-after: always;
 }
 
-.sheet:last-child {
-  break-after: auto;
-  page-break-after: auto;
-}
-
-/* Тонкая рамка по краю — помогает ровно обрезать */
+/* Тонкая декоративная рамка внутри листа */
 .sheet::before {
   content: "";
   position: absolute;
@@ -101,7 +129,7 @@ body {
 }
 
 .brand__name {
-  font: 600 13pt/1.15 var(--font-display);
+  font: 700 13pt/1.15 var(--font-display);
   text-align: left;
 }
 
@@ -109,7 +137,7 @@ body {
 
 .cta__title {
   color: var(--accent);
-  font: 600 28pt/1 var(--font-display);
+  font: 700 28pt/1 var(--font-display);
   letter-spacing: -.01em;
 }
 
@@ -180,19 +208,19 @@ body {
 @media print {
   body { background: none; }
   .toolbar { display: none; }
-  .sheet { margin: 0; box-shadow: none; }
+  .plate { margin: 0; box-shadow: none; }
 }
 </style>
 </head>
 <body>
 
 <div class="toolbar">
-  <span>Тейбл-тент A6 · 2 стороны</span>
+  <span>{{modeLabel}}</span>
   <button type="button" onclick="window.print()">Печать</button>
 </div>
 
-<section class="sheet">{{page}}</section>
-<section class="sheet">{{page}}</section>
+<section class="plate">{{marks}}<div class="bleed"></div><div class="sheet">{{page}}</div></section>
+<section class="plate">{{marks}}<div class="bleed"></div><div class="sheet">{{page}}</div></section>
 
 </body>
 </html>

@@ -5,14 +5,13 @@
   "tagline_en": "All-day breakfast, fresh pastries and specialty coffee",
   "logo": "logo.svg",
 
-  "url": "https://menu.example.ru/demo-cafe/",
   "theme": "warm",
   "noindex": true,
   "defaultLang": "ru",
   "currency": "₽",
 
   "phone": "+7 (900) 123-45-67",
-  "booking": "https://t.me/koritsa_demo",
+  "booking": { "type": "telegram", "value": "@koritsa_demo" },
   "address": "Москва, ул. Садовая, 12",
   "address_en": "12 Sadovaya St, Moscow",
   "maps": {

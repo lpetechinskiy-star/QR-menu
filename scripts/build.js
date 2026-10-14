@@ -6,17 +6,18 @@
  *   npm run build -- demo-cafe         — собрать одно кафе
  *   npm run build -- demo-cafe --open  — собрать и открыть в браузере
  *
+ * Адрес страницы: <baseUrl из config.json>/<папка-кафе>/ (от него строятся QR и og:url).
+ *
  * Флаги:
- *   --base-url=https://menu.site.ru/   — адрес хостинга, если в menu.json нет "url"
- *                                        (страница будет <base-url>/<папка-кафе>/)
- *   --no-pdf                           — не пытаться делать PDF тейбл-тента
- *   --open                             — открыть готовую страницу в браузере
+ *   --base-url=https://...  — временно заменить baseUrl из config.json
+ *   --no-pdf                — не делать PDF тейбл-тентов
+ *   --open                  — открыть готовую страницу в браузере
  *
  * Результат: dist/<папка-кафе>/
- *   index.html       — страница меню (CSS и JS встроены, один запрос)
- *   qr.png, qr.svg   — QR-код на страницу
- *   table-tent.html  — макет тейбл-тента A6 для печати
- *   table-tent.pdf   — то же в PDF (если установлен playwright)
+ *   index.html                        — страница меню (CSS и JS встроены, один запрос)
+ *   qr.png, qr.svg                    — QR-код на страницу
+ *   table-tent.html / .pdf            — тейбл-тент A6 для домашней печати (без вылетов)
+ *   table-tent-print.html / .pdf      — для типографии: вылеты 3 мм и метки реза
  */
 'use strict';
 
@@ -26,6 +27,7 @@ const { pathToFileURL } = require('url');
 const QRCode = require('qrcode');
 
 const ROOT = path.resolve(__dirname, '..');
+const CONFIG_FILE = path.join(ROOT, 'config.json');
 const CLIENTS_DIR = path.join(ROOT, 'clients');
 const DIST_DIR = path.join(ROOT, 'dist');
 const TEMPLATES_DIR = path.join(ROOT, 'templates');
@@ -63,6 +65,7 @@ const UI = {
     tentMenu: 'Меню',
     tentScan: 'Наведите камеру телефона на QR-код',
     tentWifiHint: 'Отсканируйте, чтобы подключиться',
+    credit: 'Сделано',
   },
   en: {
     call: 'Call',
@@ -89,6 +92,7 @@ const UI = {
     tentMenu: 'Menu',
     tentScan: 'Point your phone camera at the QR code',
     tentWifiHint: 'Scan to connect',
+    credit: 'Made by',
   },
 };
 
@@ -256,6 +260,174 @@ function fileSize(p) {
   return b > 1024 * 1024 ? `${(b / 1024 / 1024).toFixed(1)} МБ` : `${Math.max(1, Math.round(b / 1024))} КБ`;
 }
 
+/** Общие настройки всех кафе: config.json в корне проекта. */
+function loadConfig() {
+  if (!fs.existsSync(CONFIG_FILE)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'));
+  } catch (e) {
+    throw new BuildError(`ошибка в config.json: ${e.message}`);
+  }
+}
+
+/** Публичный адрес страницы кафе: <baseUrl>/<папка>/ (или явный "url" в menu.json). */
+function pageUrl(slug, cfg, baseUrl) {
+  if (isFilled(cfg.url)) return String(cfg.url).trim();
+  if (!isFilled(baseUrl)) return null;
+  return String(baseUrl).trim().replace(/\/*$/, '/') + encodeURIComponent(slug) + '/';
+}
+
+/** booking: { type: phone|whatsapp|telegram|url, value } → ссылка для кнопки. */
+function bookingHref(slug, booking) {
+  if (!booking) return null;
+  if (typeof booking === 'string') return safeUrl(booking);
+  const value = String(booking.value ?? '').trim();
+  if (!value) {
+    warn(slug, 'booking: не заполнено поле "value" — кнопка «Забронировать» скрыта');
+    return null;
+  }
+  const isUrl = /^https?:\/\//i.test(value);
+  switch (booking.type) {
+    case 'phone':
+      return telHref(value);
+    case 'whatsapp': {
+      if (isUrl) return value;
+      let digits = value.replace(/\D/g, '');
+      if (digits.length === 11 && digits.startsWith('8')) digits = '7' + digits.slice(1);
+      return `https://wa.me/${digits}`;
+    }
+    case 'telegram':
+      return isUrl ? value : `https://t.me/${value.replace(/^@/, '')}`;
+    case 'url':
+      return safeUrl(value);
+    default:
+      warn(slug, `booking: неизвестный type "${booking.type}" (нужно phone, whatsapp, telegram или url)`);
+      return null;
+  }
+}
+
+/* ---- Разбор часов работы для бейджа «Открыто сейчас» ---- */
+
+const DAY_NAMES = [
+  ['пн', 'пон', 'понедельник', 'mon', 'monday'],
+  ['вт', 'вто', 'вторник', 'tue', 'tues', 'tuesday'],
+  ['ср', 'сре', 'среда', 'wed', 'wednesday'],
+  ['чт', 'чет', 'четверг', 'thu', 'thur', 'thurs', 'thursday'],
+  ['пт', 'пят', 'пятница', 'fri', 'friday'],
+  ['сб', 'суб', 'суббота', 'sat', 'saturday'],
+  ['вс', 'вос', 'воскресенье', 'sun', 'sunday'],
+];
+const EVERY_DAY = /ежедневно|каждый день|без выходных|все дни|daily|every ?day/i;
+
+function parseDay(token) {
+  const t = token.trim().toLowerCase().replace(/\.$/, '');
+  return DAY_NAMES.findIndex((names) => names.includes(t));
+}
+
+/** «Пн–Пт», «Сб, Вс», «Ежедневно» → [0..6] (0 — понедельник) или null. */
+function parseDays(text) {
+  if (!isFilled(text) || EVERY_DAY.test(text)) return [0, 1, 2, 3, 4, 5, 6];
+  const days = new Set();
+  for (const part of String(text).split(/\s*(?:,|;|\sи\s|&)\s*/)) {
+    if (!part.trim()) continue;
+    const range = part.split(/\s*[–—-]\s*/);
+    const group = /^(будни|по будням|weekdays)$/i.test(part.trim())
+      ? [0, 1, 2, 3, 4]
+      : /^(выходные|по выходным|weekends?)$/i.test(part.trim())
+        ? [5, 6]
+        : null;
+    if (group) {
+      group.forEach((d) => days.add(d));
+    } else if (range.length === 1) {
+      const d = parseDay(range[0]);
+      if (d < 0) return null;
+      days.add(d);
+    } else if (range.length === 2) {
+      const a = parseDay(range[0]);
+      const b = parseDay(range[1]);
+      if (a < 0 || b < 0) return null;
+      for (let d = a; ; d = (d + 1) % 7) {
+        days.add(d);
+        if (d === b) break;
+      }
+    } else return null;
+  }
+  return days.size ? [...days] : null;
+}
+
+/** «08:00–22:00» → [480, 1320]; через полночь «18:00–02:00» → [1080, 1560]. */
+function parseTime(text) {
+  const s = String(text ?? '').toLowerCase();
+  if (/круглосуточно|24\s*\/\s*7|24 часа|24 hours|around the clock/.test(s)) return [0, 1440];
+  if (/выходной|закрыто|closed|day off/.test(s)) return 'closed';
+  const m = /(\d{1,2})[:.](\d{2})\s*[–—-]\s*(\d{1,2})[:.](\d{2})/.exec(s);
+  if (!m) return null;
+  const open = +m[1] * 60 + +m[2];
+  let close = +m[3] * 60 + +m[4];
+  if (close <= open) close += 1440;
+  return [open, close];
+}
+
+/** Расписание по дням недели: [[ [open, close], ... ], ...×7] или null, если не разобрали. */
+function parseSchedule(slug, hours) {
+  const week = [[], [], [], [], [], [], []];
+  for (const h of hours) {
+    let daysText;
+    let timeText;
+    if (typeof h === 'string') {
+      const idx = h.search(/\d|круглосуточно|выходной|closed/i);
+      daysText = idx > 0 ? h.slice(0, idx) : '';
+      timeText = idx >= 0 ? h.slice(idx) : h;
+    } else {
+      daysText = h.days;
+      timeText = h.time;
+    }
+    const days = parseDays(daysText);
+    const time = parseTime(timeText);
+    if (!days || !time) {
+      const shown = typeof h === 'string' ? h : `${h.days ?? ''} ${h.time ?? ''}`.trim();
+      warn(slug, `не удалось разобрать часы «${shown}» — бейдж «Открыто/Закрыто» не показан`);
+      return null;
+    }
+    if (time === 'closed') continue;
+    for (const d of days) week[d].push(time);
+  }
+  return week;
+}
+
+/** Метки реза для листа: обрезной формат 105×148 мм, поле slug мм, вылеты bleed мм. */
+function cropMarks(slug, bleed) {
+  const W = 105 + 2 * slug;
+  const H = 148 + 2 * slug;
+  const xs = [slug, slug + 105];
+  const ys = [slug, slug + 148];
+  const lines = [];
+  for (const x of xs) {
+    lines.push([x, 0, x, slug - bleed], [x, H - slug + bleed, x, H]);
+  }
+  for (const y of ys) {
+    lines.push([0, y, slug - bleed, y], [W - slug + bleed, y, W, y]);
+  }
+  const d = lines.map(([x1, y1, x2, y2]) => `M${x1} ${y1}L${x2} ${y2}`).join('');
+  // 0.25 pt ≈ 0.088 мм — стандартная толщина меток реза
+  return `<svg class="marks" viewBox="0 0 ${W} ${H}" aria-hidden="true"><path d="${d}" stroke="#000" stroke-width="0.088" fill="none"/></svg>`;
+}
+
+/** @font-face для тейбл-тента со шрифтами, встроенными в HTML (data: URI). */
+let fontsCss = null;
+function inlineFonts() {
+  if (fontsCss !== null) return fontsCss;
+  const dir = path.join(TEMPLATES_DIR, 'fonts');
+  const file = path.join(dir, 'fonts.css');
+  fontsCss = fs.existsSync(file)
+    ? fs.readFileSync(file, 'utf8').replace(/url\(([^)]+\.woff2)\)/g, (_, name) => {
+        const data = fs.readFileSync(path.join(dir, name)).toString('base64');
+        return `url(data:font/woff2;base64,${data})`;
+      })
+    : '';
+  return fontsCss;
+}
+
 /* ------------------------------------------------------------------ */
 /* Сборка одного кафе                                                  */
 /* ------------------------------------------------------------------ */
@@ -394,7 +566,7 @@ function linkAttrs(url) {
   return /^https?:/i.test(url) ? ' target="_blank" rel="noopener"' : '';
 }
 
-function renderPage({ slug, cfg, clientDir, outDir, templates, themes }) {
+function renderPage({ slug, cfg, url, config, clientDir, outDir, templates, themes }) {
   const r = createRenderer(cfg);
   const { tx, f, ui, label } = r;
   const theme = cfg.theme || 'light';
@@ -411,7 +583,7 @@ function renderPage({ slug, cfg, clientDir, outDir, templates, themes }) {
   if (isFilled(cfg.phone)) {
     actions.push(`<a class="btn" href="${esc(telHref(cfg.phone))}">${icon('phone')}${ui('call')}</a>`);
   }
-  const booking = safeUrl(cfg.booking) || (isFilled(cfg.phone) ? telHref(cfg.phone) : null);
+  const booking = bookingHref(slug, cfg.booking);
   if (booking) {
     actions.push(
       `<a class="btn btn--primary" href="${esc(booking)}"${linkAttrs(booking)}>${icon('calendar')}${ui('book')}</a>`
@@ -500,7 +672,13 @@ ${isFilled(item.description) ? `<p class="dish__desc">${f(item, 'description')}<
           : `<dt>${f(h, 'days')}</dt><dd>${f(h, 'time')}</dd>`
       )
       .join('');
-    cards.push(`<div class="card"><h3 class="card__title">${icon('clock')}${ui('hours')}</h3><dl class="hours">${rows}</dl></div>`);
+    // Бейдж «Открыто сейчас / Закрыто» считается в браузере по времени кафе (по умолчанию — московскому).
+    const schedule = parseSchedule(slug, hours);
+    const offset = Number.isFinite(cfg.utcOffset) ? cfg.utcOffset : 3;
+    const badge = schedule
+      ? `<p class="status" data-schedule="${esc(JSON.stringify({ o: offset, w: schedule }))}" hidden></p>`
+      : '';
+    cards.push(`<div class="card"><h3 class="card__title">${icon('clock')}${ui('hours')}</h3>${badge}<dl class="hours">${rows}</dl></div>`);
   }
 
   if (isFilled(cfg.address)) {
@@ -531,8 +709,8 @@ ${isFilled(item.description) ? `<p class="dish__desc">${f(item, 'description')}<
   const socials = Array.isArray(cfg.socials)
     ? cfg.socials.map((s) => [s.name, s.url])
     : Object.entries(cfg.socials || {});
-  for (const [key, url] of socials) {
-    const href = safeUrl(url);
+  for (const [key, link] of socials) {
+    const href = safeUrl(link);
     if (!href) continue;
     const name = SOCIAL_LABELS[String(key).toLowerCase()] || key;
     contactPills.push(`<a class="pill" href="${esc(href)}"${linkAttrs(href)}>${label(name)}</a>`);
@@ -557,6 +735,11 @@ ${cards.join('\n')}
   /* ---- Подвал ---- */
   const footer = [`<p>${f(cfg, 'name')}</p>`];
   if (isFilled(cfg.footer)) footer.push(`<p>${f(cfg, 'footer')}</p>`);
+  const credit = config.credit || {};
+  if (cfg.showCredit !== false && safeUrl(credit.url)) {
+    const text = credit.name ? `${ui('credit')} ${esc(credit.name)}` : ui('credit');
+    footer.push(`<p class="credit"><a href="${esc(safeUrl(credit.url))}" target="_blank" rel="noopener">${text}</a></p>`);
+  }
 
   /* ---- <head> ---- */
   const nameRu = cfg.name;
@@ -573,9 +756,9 @@ ${cards.join('\n')}
   const indexable = cfg.noindex === false;
   const robots = indexable ? '' : '<meta name="robots" content="noindex, nofollow">';
   const ogExtra = [];
-  if (isFilled(cfg.url)) {
-    ogExtra.push(`<meta property="og:url" content="${esc(cfg.url)}">`);
-    if (indexable) ogExtra.push(`<link rel="canonical" href="${esc(cfg.url)}">`);
+  if (url) {
+    ogExtra.push(`<meta property="og:url" content="${esc(url)}">`);
+    if (indexable) ogExtra.push(`<link rel="canonical" href="${esc(url)}">`);
   }
 
   let css = templates.css;
@@ -626,7 +809,13 @@ function wifiQrPayload(wifi) {
   return `WIFI:T:${type};S:${e(wifi.network)};${isFilled(wifi.password) ? `P:${e(wifi.password)};` : ''};`;
 }
 
-async function renderTent({ slug, cfg, url, clientDir, outDir, templates, themes }) {
+const TENT_MODES = {
+  home: { slug: 0, bleed: 0, label: 'Тейбл-тент A6 · 2 стороны · для домашней печати (A6, поля «нет», фон включить)' },
+  press: { slug: 10, bleed: 3, label: 'Для типографии: обрез A6 105 × 148 мм · вылеты 3 мм · метки реза' },
+};
+
+async function renderTent({ slug, cfg, url, clientDir, outDir, templates, themes }, mode) {
+  const m = TENT_MODES[mode];
   const r = createRenderer(cfg);
   const themeVars = themes[cfg.theme || 'light'] || themes.light;
   const vars = Object.entries(themeVars)
@@ -676,7 +865,14 @@ async function renderTent({ slug, cfg, url, clientDir, outDir, templates, themes
 
   return fill(templates.tent, {
     lang: r.lang,
-    title: esc(`${name} — тейбл-тент A6`),
+    title: esc(`${name} — тейбл-тент A6${mode === 'press' ? ' (для типографии)' : ''}`),
+    pageW: `${105 + 2 * m.slug}mm`,
+    pageH: `${148 + 2 * m.slug}mm`,
+    slug: `${m.slug}mm`,
+    bleed: `${m.bleed}mm`,
+    marks: m.slug ? cropMarks(m.slug, m.bleed) : '',
+    modeLabel: esc(m.label),
+    fonts: inlineFonts(),
     vars: vars + ' ' + accent,
     page,
   });
@@ -715,6 +911,7 @@ async function writePdf(htmlPath, pdfPath) {
     const browser = await browserPromise;
     const page = await browser.newPage();
     await page.goto(pathToFileURL(htmlPath).href, { waitUntil: 'load' });
+    await page.evaluate(() => document.fonts.ready.then(() => true));
     await page.pdf({ path: pdfPath, preferCSSPageSize: true, printBackground: true });
     await page.close();
     return null;
@@ -723,12 +920,33 @@ async function writePdf(htmlPath, pdfPath) {
   }
 }
 
+/**
+ * Chromium округляет размер страницы до целых пикселей (105 мм → 105,2 мм).
+ * Выставляем точные MediaBox/TrimBox/BleedBox — их проверяют в типографии.
+ */
+async function setPdfBoxes(pdfPath, m) {
+  const { PDFDocument } = require('pdf-lib');
+  const pt = (mm) => (mm * 72) / 25.4;
+  const doc = await PDFDocument.load(fs.readFileSync(pdfPath));
+  const W = pt(105 + 2 * m.slug);
+  const H = pt(148 + 2 * m.slug);
+  for (const page of doc.getPages()) {
+    // Вёрстка идёт от верхнего левого угла, поэтому лишнее срезаем снизу и справа.
+    const y0 = page.getMediaBox().height - H;
+    page.setMediaBox(0, y0, W, H);
+    page.setCropBox(0, y0, W, H);
+    page.setBleedBox(pt(m.slug - m.bleed), y0 + pt(m.slug - m.bleed), pt(105 + 2 * m.bleed), pt(148 + 2 * m.bleed));
+    page.setTrimBox(pt(m.slug), y0 + pt(m.slug), pt(105), pt(148));
+  }
+  fs.writeFileSync(pdfPath, await doc.save());
+}
+
 /* ------------------------------------------------------------------ */
 /* CLI                                                                 */
 /* ------------------------------------------------------------------ */
 
 function parseArgs(argv) {
-  const opts = { slugs: [], open: false, pdf: true, baseUrl: process.env.QR_MENU_BASE_URL || null };
+  const opts = { slugs: [], open: false, pdf: true, baseUrl: null };
   for (const a of argv) {
     if (a === '--open') opts.open = true;
     else if (a === '--no-pdf') opts.pdf = false;
@@ -765,6 +983,8 @@ async function main() {
     tent: fs.readFileSync(path.join(TEMPLATES_DIR, 'table-tent.html'), 'utf8'),
   };
   const themes = parseThemes(templates.css);
+  const config = loadConfig();
+  const baseUrl = opts.baseUrl || config.baseUrl;
 
   const slugs = opts.slugs.length
     ? opts.slugs
@@ -787,33 +1007,35 @@ async function main() {
       fs.rmSync(outDir, { recursive: true, force: true });
       fs.mkdirSync(outDir, { recursive: true });
 
-      const ctx = { slug, cfg, clientDir: dir, outDir, templates, themes };
+      const url = pageUrl(slug, cfg, baseUrl);
+      const ctx = { slug, cfg, url, config, clientDir: dir, outDir, templates, themes };
       fs.writeFileSync(path.join(outDir, 'index.html'), renderPage(ctx));
-
       const files = ['index.html'];
-      const url = isFilled(cfg.url)
-        ? String(cfg.url).trim()
-        : opts.baseUrl
-          ? opts.baseUrl.replace(/\/*$/, '/') + encodeURIComponent(slug) + '/'
-          : null;
 
       if (url) {
         if (!/^https?:\/\//i.test(url)) warn(slug, `адрес "${url}" должен начинаться с https://`);
         await writeQr(url, outDir);
-        const tentPath = path.join(outDir, 'table-tent.html');
-        fs.writeFileSync(tentPath, await renderTent({ ...ctx, url }));
-        files.push('qr.png', 'qr.svg', 'table-tent.html');
-        if (opts.pdf) {
-          const err = await writePdf(tentPath, path.join(outDir, 'table-tent.pdf'));
-          if (err) warn(slug, `PDF не создан (${err}). Откройте table-tent.html и распечатайте (Ctrl+P, A6)`);
-          else files.push('table-tent.pdf');
+        files.push('qr.png', 'qr.svg');
+        for (const [mode, name] of [['home', 'table-tent'], ['press', 'table-tent-print']]) {
+          const htmlPath = path.join(outDir, `${name}.html`);
+          fs.writeFileSync(htmlPath, await renderTent(ctx, mode));
+          files.push(`${name}.html`);
+          if (!opts.pdf) continue;
+          const pdfPath = path.join(outDir, `${name}.pdf`);
+          const err = await writePdf(htmlPath, pdfPath);
+          if (err) {
+            warn(slug, `${name}.pdf не создан (${err}). Откройте ${name}.html и распечатайте (Ctrl+P)`);
+          } else {
+            await setPdfBoxes(pdfPath, TENT_MODES[mode]);
+            files.push(`${name}.pdf`);
+          }
         }
       } else {
-        warn(slug, 'не указан "url" в menu.json (или --base-url) — QR-код и тейбл-тент не созданы');
+        warn(slug, 'не задан baseUrl в config.json (или --base-url) — QR-код и тейбл-тент не созданы');
       }
 
       console.log(`✓ ${slug} → ${path.relative(ROOT, outDir)}/`);
-      for (const file of files) console.log(`    ${file.padEnd(16)} ${fileSize(path.join(outDir, file))}`);
+      for (const file of files) console.log(`    ${file.padEnd(22)} ${fileSize(path.join(outDir, file))}`);
       if (url) console.log(`    QR ведёт на: ${url}`);
       built.push(outDir);
     } catch (e) {
@@ -834,7 +1056,11 @@ async function main() {
   if (failed) process.exitCode = 1;
 }
 
-main().catch((e) => {
-  console.error(e instanceof BuildError ? `Ошибка: ${e.message}` : e);
-  process.exitCode = 1;
-});
+if (require.main === module) {
+  main().catch((e) => {
+    console.error(e instanceof BuildError ? `Ошибка: ${e.message}` : e);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = { loadConfig, pageUrl, parseDays, parseTime, parseSchedule, bookingHref, BuildError };

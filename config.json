@@ -1,0 +1,17 @@
+{
+  "baseUrl": "https://menu.saintsites.ru",
+  "credit": {
+    "name": "SaintSites",
+    "url": "https://saintsites.ru"
+  },
+  "deploy": {
+    "provider": "github-pages",
+    "githubPages": {
+      "remote": "origin",
+      "branch": "gh-pages"
+    },
+    "netlify": {
+      "siteId": ""
+    }
+  }
+}

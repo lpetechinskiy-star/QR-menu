@@ -37,6 +37,7 @@ function listing() {
     .map(
       (c) => `<li><a href="/${encodeURIComponent(c)}/">${c}</a>
       · <a href="/${encodeURIComponent(c)}/table-tent.html">тейбл-тент</a>
+      · <a href="/${encodeURIComponent(c)}/table-tent-print.html">для типографии</a>
       · <a href="/${encodeURIComponent(c)}/qr.png">QR</a></li>`
     )
     .join('');

@@ -64,6 +64,69 @@
     update();
   }
 
+  /* ---------- «Открыто сейчас» / «Закрыто» по времени кафе ---------- */
+  var badge = doc.querySelector('[data-schedule]');
+  if (badge) {
+    var sched = JSON.parse(badge.getAttribute('data-schedule')); // { o: UTC-смещение, w: [[[откр, закр], ...] × 7] }
+    var DAYS_RU = ['в понедельник', 'во вторник', 'в среду', 'в четверг', 'в пятницу', 'в субботу', 'в воскресенье'];
+    var DAYS_EN = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    var hm = function (m) {
+      m = m % 1440;
+      var h = Math.floor(m / 60), mm = m % 60;
+      return (h < 10 ? '0' : '') + h + ':' + (mm < 10 ? '0' : '') + mm;
+    };
+    var both = function (ru, en) {
+      return '<span class="t-ru">' + ru + '</span><span class="t-en" lang="en">' + en + '</span>';
+    };
+
+    var renderStatus = function () {
+      // «Сейчас» в часовом поясе кафе (по умолчанию Москва, UTC+3), неделя с понедельника.
+      var now = new Date(Date.now() + sched.o * 3600000);
+      var day = (now.getUTCDay() + 6) % 7;
+      var min = now.getUTCHours() * 60 + now.getUTCMinutes();
+      var w = sched.w, i, iv;
+
+      var closeAt = null, allDay = false;
+      for (i = 0; i < w[day].length; i++) {
+        iv = w[day][i];
+        if (min >= iv[0] && min < iv[1]) { closeAt = iv[1]; allDay = iv[1] - iv[0] >= 1440; }
+      }
+      var prev = w[(day + 6) % 7];
+      for (i = 0; i < prev.length && closeAt === null; i++) {
+        iv = prev[i]; // интервал вчерашнего дня, заходящий за полночь
+        if (iv[1] > 1440 && min < iv[1] - 1440) closeAt = iv[1] - 1440;
+      }
+
+      var html;
+      if (closeAt !== null) {
+        badge.className = 'status status--open';
+        html = both('Открыто сейчас', 'Open now') + '<small>' +
+          (allDay ? both('круглосуточно', '24 hours') : both('до ' + hm(closeAt), 'until ' + hm(closeAt))) + '</small>';
+      } else {
+        badge.className = 'status status--closed';
+        html = both('Закрыто', 'Closed');
+        for (var k = 0; k < 8; k++) {
+          var d = (day + k) % 7, next = null;
+          for (i = 0; i < w[d].length; i++) {
+            iv = w[d][i];
+            if ((k > 0 || iv[0] > min) && (next === null || iv[0] < next)) next = iv[0];
+          }
+          if (next === null) continue;
+          var at = hm(next);
+          html += '<small>' + (k === 0 ? both('откроется в ' + at, 'opens at ' + at)
+            : k === 1 ? both('откроется завтра в ' + at, 'opens tomorrow at ' + at)
+            : both('откроется ' + DAYS_RU[d] + ' в ' + at, 'opens ' + DAYS_EN[d] + ' at ' + at)) + '</small>';
+          break;
+        }
+      }
+      badge.innerHTML = html;
+      badge.hidden = false;
+    };
+    renderStatus();
+    setInterval(renderStatus, 60000);
+  }
+
   /* ---------- Копирование пароля Wi-Fi ---------- */
   doc.querySelectorAll('[data-copy]').forEach(function (btn) {
     btn.addEventListener('click', function () {
