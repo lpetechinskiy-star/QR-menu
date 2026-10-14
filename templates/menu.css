@@ -503,7 +503,7 @@ main {
 
 .footer p { margin: 4px 0; }
 
-.credit { font-size: 12px; opacity: .75; }
+.credit, .build { font-size: 12px; opacity: .75; }
 .credit a { text-decoration: none; }
 .credit a:hover { text-decoration: underline; }
 
