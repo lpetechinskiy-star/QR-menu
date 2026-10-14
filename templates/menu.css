@@ -100,6 +100,92 @@
 [data-theme="ivory"] .card { box-shadow: none; }
 [data-theme="ivory"] .nav a[aria-current="true"] { background: var(--accent); color: var(--accent-ink); }
 
+[data-theme="italia"] {
+  color-scheme: light;
+  --bg: #f5efe3;
+  --surface: #fffaf1;
+  --text: #2a251e;
+  --muted: #7b705f;
+  --line: #e3d6bf;
+  --chip: #ede3cf;
+  --accent: #2f5b3a;
+  --accent-ink: #ffffff;
+  --terra: #b5452f;
+  --red: #b5452f;
+  --green: #2f5b3a;
+  --blue: #3d5f7a;
+  --shadow: none;
+}
+
+/* Тема italia: траттория — пергамент, базилик и томат, триколор, курсивные подзаголовки */
+[data-theme="italia"] body {
+  background:
+    radial-gradient(120% 60% at 50% 0%, #fbf6ec 0%, rgba(251, 246, 236, 0) 70%),
+    var(--bg);
+}
+[data-theme="italia"] body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  height: 4px;
+  background: linear-gradient(90deg, #2f5b3a 0 33.33%, #fffaf1 33.33% 66.66%, #b5452f 66.66% 100%);
+}
+[data-theme="italia"] .hero { padding-top: 78px; padding-bottom: 30px; }
+[data-theme="italia"] .hero__logo { width: 112px; height: 112px; box-shadow: 0 6px 24px rgba(60, 40, 10, .12); }
+[data-theme="italia"] .hero__name { font-weight: 500; font-size: 36px; letter-spacing: .01em; }
+[data-theme="italia"] .hero__tagline { font: italic 17px/1.4 var(--font-display); color: var(--terra); }
+[data-theme="italia"] .btn { border-color: var(--line); border-radius: 14px; background: var(--surface); }
+[data-theme="italia"] .btn--primary { border-color: transparent; background: var(--accent); }
+[data-theme="italia"] .nav { border-bottom-color: var(--line); }
+[data-theme="italia"] .nav a { background: transparent; border: 1px solid var(--line); }
+[data-theme="italia"] .nav a[aria-current="true"] { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+[data-theme="italia"] .section { position: relative; padding-top: 52px; }
+/* Орнамент между разделами: ромб с тонкими линиями */
+[data-theme="italia"] .section + .section::before {
+  content: "◆";
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--terra);
+  font-size: 9px;
+  letter-spacing: 0;
+}
+[data-theme="italia"] .section__kicker {
+  margin: 0 0 2px;
+  color: var(--terra);
+  font: italic 500 17px/1.2 var(--font-display);
+  letter-spacing: .02em;
+  text-align: center;
+}
+[data-theme="italia"] .section__title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 6px;
+  font-size: 15px;
+  font-family: var(--font);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-align: center;
+}
+[data-theme="italia"] .section__title::before,
+[data-theme="italia"] .section__title::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+[data-theme="italia"] .section__note { margin: 4px 0 10px; font-style: italic; text-align: center; }
+[data-theme="italia"] .list { border: 0; border-radius: 0; background: transparent; }
+[data-theme="italia"] .dish { padding: 20px 2px; }
+[data-theme="italia"] .dish__name { font: 600 19px/1.25 var(--font-display); }
+[data-theme="italia"] .dish__desc { font: italic 15px/1.5 var(--font-display); color: var(--muted); }
+[data-theme="italia"] .price { font: 600 18px/1.2 var(--font-display); }
+[data-theme="italia"] .tag--hit { background: color-mix(in srgb, var(--terra) 13%, transparent); color: var(--terra); }
+[data-theme="italia"] .card { box-shadow: none; }
+[data-theme="italia"] .info .card__title { color: var(--accent); }
+[data-theme="italia"] #info .section__title { letter-spacing: .18em; }
+
 /* ---------- Язык: показываем только тексты текущего языка ---------- */
 html[data-lang="ru"] .t-en,
 html[data-lang="en"] .t-ru { display: none; }

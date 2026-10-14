@@ -45,7 +45,7 @@ function listing() {
 <title>QR-меню — превью</title>
 <body style="font:16px/1.6 system-ui;max-width:640px;margin:40px auto;padding:0 16px">
 <h1>Собранные меню</h1><ul>${items || '<li>Пусто — запустите npm run build</li>'}</ul>
-<p style="color:#777">Темы: добавьте к адресу ?theme=light, ?theme=dark, ?theme=warm или ?theme=ivory</p>`;
+<p style="color:#777">Темы: добавьте к адресу ?theme=light, ?theme=dark, ?theme=warm, ?theme=ivory или ?theme=italia</p>`;
 }
 
 http

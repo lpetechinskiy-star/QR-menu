@@ -33,7 +33,7 @@ const CLIENTS_DIR = path.join(ROOT, 'clients');
 const DIST_DIR = path.join(ROOT, 'dist');
 const TEMPLATES_DIR = path.join(ROOT, 'templates');
 
-const THEMES = ['light', 'dark', 'warm', 'ivory'];
+const THEMES = ['light', 'dark', 'warm', 'ivory', 'italia'];
 const INLINE_LOGO_MAX_BYTES = 30 * 1024;
 
 /* ------------------------------------------------------------------ */
@@ -671,6 +671,8 @@ function renderPage({ slug, cfg, url, config, clientDir, outDir, templates, them
       endpoint,
       via: via && isFilled(cfg.orderContact) ? via : null,
       contact: via && isFilled(cfg.orderContact) ? String(cfg.orderContact).trim() : null,
+      hint: isFilled(cfg.commentHint) ? String(cfg.commentHint) : null,
+      hintEn: isFilled(cfg.commentHint_en) ? String(cfg.commentHint_en) : null,
     };
     // </script> внутри JSON невозможен: экранируем «<».
     cartConfig = `<script type="application/json" id="cart-cfg">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
@@ -714,6 +716,7 @@ function renderPage({ slug, cfg, url, config, clientDir, outDir, templates, them
         }
       }
       return `<section class="section" id="${id}">
+${isFilled(section.kicker) ? `<p class="section__kicker" lang="it">${esc(section.kicker)}</p>` : ''}
 <h2 class="section__title">${f(section, 'title')}</h2>
 ${note}
 <ul class="list">

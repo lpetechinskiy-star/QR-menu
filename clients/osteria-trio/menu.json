@@ -2,12 +2,12 @@
   "_note": "osteria-trio.ru и Яндекс Карты недоступны из среды сборки. Реальные позиции — из выдержек поиска (osteria-trio.ru и агрегаторы), см. _source; всё с _stub — заглушки.",
   "name": "Osteria Trio",
   "name_en": "Osteria Trio",
-  "tagline": "Итальянская кухня на ВДНХ",
-  "tagline_en": "Italian kitchen at VDNKh",
+  "tagline": "Cucina italiana · ВДНХ",
+  "tagline_en": "Cucina italiana · VDNKh",
   "logo": "logo.svg",
-  "_logo_note": "заглушка: текстовая монограмма в итальянской гамме — логотип с сайта получить не удалось",
-  "theme": "ivory",
-  "_accent_note": "заглушка: бордо из темы ivory — фирменные цвета с сайта получить не удалось",
+  "_logo_note": "монограмма-герб (лавровый венок, триколор) — логотип с сайта получить не удалось",
+  "theme": "italia",
+  "_accent_note": "тема italia: базилик #2f5b3a и томат #b5452f — фирменные цвета с сайта получить не удалось",
   "defaultLang": "ru",
   "currency": "₽",
   "phone": "+7 (495) 225-49-90",
@@ -28,6 +28,7 @@
   ],
   "sections": [
     {
+      "kicker": "Antipasti",
       "title": "Закуски",
       "title_en": "Antipasti",
       "items": [
@@ -99,6 +100,7 @@
       ]
     },
     {
+      "kicker": "Insalate e zuppe",
       "title": "Салаты и супы",
       "title_en": "Salads & soups",
       "items": [
@@ -156,6 +158,7 @@
       ]
     },
     {
+      "kicker": "Primi piatti",
       "title": "Паста и ризотто",
       "title_en": "Pasta & risotto",
       "items": [
@@ -221,6 +224,7 @@
       ]
     },
     {
+      "kicker": "Pizze",
       "title": "Пицца",
       "title_en": "Pizza",
       "note": "Сырный бортик — +180 ₽",
@@ -291,6 +295,7 @@
       ]
     },
     {
+      "kicker": "Secondi",
       "title": "Горячее",
       "title_en": "Mains",
       "items": [
@@ -339,6 +344,7 @@
       ]
     },
     {
+      "kicker": "Dolci",
       "title": "Десерты",
       "title_en": "Desserts",
       "items": [
@@ -390,6 +396,7 @@
       ]
     },
     {
+      "kicker": "Bevande",
       "title": "Напитки",
       "title_en": "Drinks",
       "items": [
@@ -450,5 +457,7 @@
         }
       ]
     }
-  ]
+  ],
+  "commentHint": "Например: без лука, подать всё одновременно",
+  "commentHint_en": "E.g. no onion, serve everything together"
 }

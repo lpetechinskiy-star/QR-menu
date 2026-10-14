@@ -421,7 +421,7 @@
         where +
         '<label class="field-label" for="cart-comment">' + both('Комментарий', 'Comment') + '</label>' +
         '<textarea id="cart-comment" class="comment" maxlength="500" rows="2" placeholder="' +
-        (isEn() ? 'E.g. no sugar, oat milk' : 'Например: без сахара, на овсяном молоке') + '">' + esc(state.comment) + '</textarea>' +
+        esc(isEn() ? C.hintEn || 'E.g. no sugar, oat milk' : C.hint || 'Например: без сахара, на овсяном молоке') + '">' + esc(state.comment) + '</textarea>' +
         (view === 'error' ? '<p class="hint-error">' + both('Не удалось отправить заказ. Покажите этот экран официанту.', 'Couldn’t send the order. Please show this screen to the staff.') + '</p>' : '') +
         '</div><div class="sheet__foot"><button type="button" class="btn-wide" data-checkout>' + both('Оформить заказ', 'Place order') +
         ' · ' + esc(money(t.sum)) + '</button><button type="button" class="btn-ghost" data-clear>' + both('Очистить', 'Clear all') + '</button></div>';
