@@ -455,24 +455,13 @@ function inlineFonts() {
   return fontsCss;
 }
 
-/** Метка сборки: время (МСК) и коммит исходников — чтобы сверить, какая версия на сайте. */
+/** Дата сборки (МСК) для строки «Меню обновлено» в подвале. */
 let buildInfoCache = null;
 function buildInfo() {
   if (buildInfoCache) return buildInfoCache;
   const now = new Date(Date.now() + 3 * 3600000); // Москва, UTC+3
   const pad = (n) => String(n).padStart(2, '0');
-  const date = `${pad(now.getUTCDate())}.${pad(now.getUTCMonth() + 1)}.${now.getUTCFullYear()}`;
-  const time = `${pad(now.getUTCHours())}:${pad(now.getUTCMinutes())}`;
-  let commit = '';
-  try {
-    commit = require('child_process')
-      .execSync('git rev-parse --short HEAD', { cwd: ROOT, stdio: ['ignore', 'pipe', 'ignore'] })
-      .toString()
-      .trim();
-  } catch (e) {
-    /* не git-репозиторий — без коммита */
-  }
-  buildInfoCache = { date, stamp: `${date} ${time} МСК${commit ? ` · ${commit}` : ''}` };
+  buildInfoCache = { date: `${pad(now.getUTCDate())}.${pad(now.getUTCMonth() + 1)}.${now.getUTCFullYear()}` };
   return buildInfoCache;
 }
 
@@ -908,7 +897,6 @@ ${cards.join('\n')}
     title: esc(title),
     description: esc(description),
     robots,
-    buildMeta: `<meta name="qr-menu-build" content="${esc(buildInfo().stamp)}">`,
     themeColor: esc((themes[theme] || {})['--bg'] || '#ffffff'),
     ogExtra: ogExtra.join('\n'),
     favicon: logoSrc ? `<link rel="icon" href="${esc(logoSrc)}">` : '',

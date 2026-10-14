@@ -178,10 +178,13 @@
         {
           "name": "Паста болоньезе",
           "name_en": "Tagliatelle bolognese",
+          "description": "Тальятелле, рагу из говядины, томаты, пармезан",
+          "description_en": "Tagliatelle, beef ragù, tomatoes, parmesan",
           "weight": "300 г",
           "price": 690,
           "_stub": "заглушка: цена, вес",
-          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         },
         {
           "name": "Паста с морепродуктами",
@@ -195,31 +198,40 @@
         {
           "name": "Паста с лососем в сливочном соусе",
           "name_en": "Salmon pasta in cream sauce",
+          "description": "Феттучине, лосось, сливки, шпинат",
+          "description_en": "Fettuccine, salmon, cream, spinach",
           "weight": "300 г",
           "price": 890,
-          "_stub": "заглушка: цена, вес"
+          "_stub": "заглушка: цена, вес",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         },
         {
           "name": "Ризотто с белыми грибами",
           "name_en": "Porcini risotto",
+          "description": "Арборио, белые грибы, пармезан, сливочное масло",
+          "description_en": "Arborio rice, porcini, parmesan, butter",
           "weight": "280 г",
           "price": 820,
           "tags": [
             "veg"
           ],
           "_stub": "заглушка: цена, вес",
-          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         },
         {
           "name": "Ризотто «4 сыра»",
           "name_en": "Four cheese risotto",
+          "description": "Арборио, моцарелла, горгонзола, пармезан, дор блю",
+          "description_en": "Arborio rice, mozzarella, gorgonzola, parmesan, Dor Blue",
           "weight": "280 г",
           "price": 750,
           "tags": [
             "veg"
           ],
           "_stub": "заглушка: вес",
-          "_source": "osteria-trio.ru (выдержка поиска)"
+          "_source": "osteria-trio.ru (выдержка поиска)",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         }
       ]
     },
@@ -246,16 +258,19 @@
         {
           "name": "Ветчина и грибы",
           "name_en": "Ham & mushrooms",
+          "description": "Томатный соус, моцарелла, ветчина, шампиньоны",
+          "description_en": "Tomato sauce, mozzarella, ham, mushrooms",
           "weight": "500 г",
           "price": 750,
           "_stub": "заглушка: вес",
-          "_source": "ostankino.su (агрегатор)"
+          "_source": "ostankino.su (агрегатор)",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         },
         {
           "name": "Четыре сыра",
           "name_en": "Quattro formaggi",
           "description": "Моцарелла, горгонзола, пармезан, дор блю",
-          "description_en": "Mozzarella, gorgonzola, parmesan, dor blue",
+          "description_en": "Mozzarella, gorgonzola, parmesan, Dor Blue",
           "weight": "480 г",
           "price": 870,
           "tags": [
@@ -267,30 +282,39 @@
         {
           "name": "Пепперони",
           "name_en": "Pepperoni",
+          "description": "Томатный соус, моцарелла, острая салями пепперони",
+          "description_en": "Tomato sauce, mozzarella, spicy pepperoni salami",
           "weight": "470 г",
           "price": 820,
           "tags": [
             "spicy"
           ],
-          "_stub": "заглушка: цена, вес"
+          "_stub": "заглушка: цена, вес",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         },
         {
           "name": "Пицца с ростбифом и запечённым перцем",
           "name_en": "Roast beef & roasted pepper pizza",
+          "description": "Ростбиф, запечённый болгарский перец, моцарелла, томатный соус",
+          "description_en": "Roast beef, roasted bell pepper, mozzarella, tomato sauce",
           "weight": "520 г",
           "price": 980,
           "tags": [
             "new"
           ],
           "_stub": "заглушка: цена, вес",
-          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         },
         {
           "name": "Прошутто и руккола",
           "name_en": "Prosciutto & arugula",
+          "description": "Томатный соус, моцарелла, прошутто, руккола, пармезан",
+          "description_en": "Tomato sauce, mozzarella, prosciutto, arugula, parmesan",
           "weight": "470 г",
           "price": 990,
-          "_stub": "заглушка: цена, вес"
+          "_stub": "заглушка: цена, вес",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         }
       ]
     },
@@ -302,17 +326,23 @@
         {
           "name": "Филе индейки с соусом карри",
           "name_en": "Turkey fillet with curry sauce",
+          "description": "Нежное филе индейки в сливочном соусе карри, рис басмати",
+          "description_en": "Tender turkey fillet in creamy curry sauce, basmati rice",
           "weight": "280 г",
           "price": 1100,
           "_stub": "заглушка: вес",
-          "_source": "osteria-trio.ru (выдержка поиска)"
+          "_source": "osteria-trio.ru (выдержка поиска)",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         },
         {
           "name": "Стейк рибай",
           "name_en": "Ribeye steak",
+          "description": "Мраморная говядина на гриле, соус демиглас, запечённый картофель",
+          "description_en": "Grilled marbled beef, demi-glace, roasted potatoes",
           "weight": "300 г",
           "price": 2490,
-          "_stub": "заглушка: цена, вес"
+          "_stub": "заглушка: цена, вес",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         },
         {
           "name": "Филе лосося на гриле",
@@ -326,20 +356,26 @@
         {
           "name": "Цыплёнок по-тоскански",
           "name_en": "Tuscan-style chicken",
+          "description": "Куриное бедро, вяленые томаты, шпинат, сливочно-чесночный соус",
+          "description_en": "Chicken thigh, sun-dried tomatoes, spinach, creamy garlic sauce",
           "weight": "320 г",
           "price": 1050,
-          "_stub": "заглушка: цена, вес"
+          "_stub": "заглушка: цена, вес",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         },
         {
           "name": "Запечённые овощи",
           "name_en": "Roasted vegetables",
+          "description": "Цукини, баклажан, перец, томаты, оливковое масло, травы",
+          "description_en": "Zucchini, eggplant, bell pepper, tomatoes, olive oil, herbs",
           "weight": "200 г",
           "price": 450,
           "tags": [
             "veg"
           ],
           "_stub": "заглушка: цена, вес",
-          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка",
+          "_desc_note": "описание — заглушка (состав не подтверждён)"
         }
       ]
     },
