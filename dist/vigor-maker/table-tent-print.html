@@ -129,7 +129,7 @@
   --font-display: "PT Serif", Georgia, "Times New Roman", serif;
   --slug: 10mm;   /* поле под метки реза вокруг обрезного формата */
   --bleed: 3mm; /* вылеты фона за линию реза */
-  --surface: #1c1c1e; --text: #f2efe9; --muted: #a39e95; --line: #2d2d30; --chip: #262628; --accent: #dcae5b; 
+  --surface: #1c1c1e; --text: #f2efe9; --muted: #a39e95; --line: #2d2d30; --chip: #262628; --accent: #dcae5b; --accent: #bdbec0;
 }
 
 * { box-sizing: border-box; }
@@ -238,6 +238,14 @@ body {
   flex: none;
 }
 
+.brand img.brand__wide {
+  width: auto;
+  max-width: 60mm;
+  height: 18mm;
+  border-radius: 0;
+  object-fit: contain;
+}
+
 .brand__name {
   font: 700 13pt/1.15 var(--font-display);
   text-align: left;
@@ -331,7 +339,7 @@ body {
 
 <section class="plate"><svg class="marks" viewBox="0 0 125 168" aria-hidden="true"><path d="M10 0L10 7M10 161L10 168M115 0L115 7M115 161L115 168M0 10L7 10M118 10L125 10M0 158L7 158M118 158L125 158" stroke="#000" stroke-width="0.088" fill="none"/></svg><div class="bleed"></div><div class="sheet">
   <div class="brand">
-    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI2MCIgZmlsbD0iIzFjMWMxZSIvPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjUzIiBmaWxsPSJub25lIiBzdHJva2U9IiNkY2FlNWIiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIuNyIvPgogIDx0ZXh0IHg9IjYwIiB5PSI2MCIgZHk9Ii4zNWVtIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSwgJ1BUIFNlcmlmJywgJ1RpbWVzIE5ldyBSb21hbicsIHNlcmlmIiBmb250LXNpemU9IjQyIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iLTEiIGZpbGw9IiNkY2FlNWIiPlZNPC90ZXh0Pgo8L3N2Zz4K" alt="">
+    <img src="logo.png" alt="">
     <div class="brand__name">Vigor Maker</div>
   </div>
   <div class="cta">
@@ -346,7 +354,7 @@ body {
 </div></section>
 <section class="plate"><svg class="marks" viewBox="0 0 125 168" aria-hidden="true"><path d="M10 0L10 7M10 161L10 168M115 0L115 7M115 161L115 168M0 10L7 10M118 10L125 10M0 158L7 158M118 158L125 158" stroke="#000" stroke-width="0.088" fill="none"/></svg><div class="bleed"></div><div class="sheet">
   <div class="brand">
-    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI2MCIgZmlsbD0iIzFjMWMxZSIvPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjUzIiBmaWxsPSJub25lIiBzdHJva2U9IiNkY2FlNWIiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIuNyIvPgogIDx0ZXh0IHg9IjYwIiB5PSI2MCIgZHk9Ii4zNWVtIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iR2VvcmdpYSwgJ1BUIFNlcmlmJywgJ1RpbWVzIE5ldyBSb21hbicsIHNlcmlmIiBmb250LXNpemU9IjQyIiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iLTEiIGZpbGw9IiNkY2FlNWIiPlZNPC90ZXh0Pgo8L3N2Zz4K" alt="">
+    <img src="logo.png" alt="">
     <div class="brand__name">Vigor Maker</div>
   </div>
   <div class="cta">

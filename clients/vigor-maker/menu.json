@@ -4,8 +4,8 @@
   "name_en": "Vigor Maker",
   "tagline": "Кофейня в главной арке ВДНХ · кофе с собой",
   "tagline_en": "Coffee to go in the VDNKh main arch",
-  "logo": "logo.svg",
-  "_logo_note": "монограмма в цветах страницы: фирменный логотип получить не удалось",
+  "logo": "logo.png",
+  "_logo_note": "логотип со скриншота, присланного владельцем проекта",
   "theme": "dark",
   "defaultLang": "ru",
   "currency": "₽",
@@ -182,5 +182,7 @@
         }
       ]
     }
-  ]
+  ],
+  "accentColor": "#bdbec0",
+  "_accent_note": "серый круг фирменного логотипа"
 }
