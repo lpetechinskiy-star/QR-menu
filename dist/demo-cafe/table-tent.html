@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Кофейня «Корица» — тейбл-тент A6</title>
+<style>
+/* Тейбл-тент A6 (105 × 148 мм). Две одинаковые стороны — для «домика» на стол.
+   Печать: Ctrl+P → размер бумаги A6 (или «По размеру страницы»), поля «Нет», фон — включить. */
+@page { size: 105mm 148mm; margin: 0; }
+
+:root {
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+  --surface: #fffaf2; --text: #3a2a1f; --muted: #86705d; --line: #e7d7c0; --chip: #efe2cf; --accent: #b5532a; 
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  margin: 0;
+  background: #d8d5cf;
+  color: var(--text);
+  font-family: var(--font);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  color: #3a3631;
+  font-size: 14px;
+}
+
+.toolbar button {
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: #1d1c1a;
+  color: #fff;
+  font: 600 14px/1 var(--font);
+  cursor: pointer;
+}
+
+.sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 105mm;
+  height: 148mm;
+  margin: 0 auto 10mm;
+  padding: 8mm 8mm 7mm;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, .18);
+  text-align: center;
+  break-after: page;
+  page-break-after: always;
+}
+
+.sheet:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+
+/* Тонкая рамка по краю — помогает ровно обрезать */
+.sheet::before {
+  content: "";
+  position: absolute;
+  inset: 4mm;
+  border: .3mm solid var(--line);
+  border-radius: 3mm;
+  pointer-events: none;
+}
+
+.brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3mm;
+  max-width: 100%;
+}
+
+.brand img {
+  width: 12mm;
+  height: 12mm;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+}
+
+.brand__name {
+  font: 600 13pt/1.15 var(--font-display);
+  text-align: left;
+}
+
+.cta { margin-top: 5mm; }
+
+.cta__title {
+  color: var(--accent);
+  font: 600 28pt/1 var(--font-display);
+  letter-spacing: -.01em;
+}
+
+.cta__sub {
+  margin-top: 2mm;
+  color: var(--text);
+  font-size: 9pt;
+  line-height: 1.3;
+}
+
+.cta__en {
+  margin-top: .8mm;
+  color: var(--muted);
+  font-size: 7.5pt;
+}
+
+.qr {
+  width: 56mm;
+  height: 56mm;
+  margin-top: 4mm;
+  padding: 3.5mm;
+  border: .6mm solid var(--accent);
+  border-radius: 4mm;
+  background: #fff;
+}
+
+.qr svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.url {
+  margin-top: 2mm;
+  color: var(--muted);
+  font-size: 7.5pt;
+  letter-spacing: .02em;
+}
+
+.wifi {
+  display: flex;
+  align-items: center;
+  gap: 3.5mm;
+  width: 100%;
+  margin-top: auto;
+  padding: 3mm 3.5mm;
+  border-radius: 3mm;
+  background: var(--chip);
+  text-align: left;
+}
+
+.wifi__qr {
+  flex: none;
+  width: 20mm;
+  height: 20mm;
+  padding: 1mm;
+  border-radius: 1.5mm;
+  background: #fff;
+}
+
+.wifi__qr svg { display: block; width: 100%; height: 100%; }
+
+.wifi__title { font-size: 9pt; font-weight: 700; }
+.wifi__row { margin-top: .6mm; font-size: 8.5pt; word-break: break-all; }
+.wifi__row span { color: var(--muted); }
+.wifi__hint { margin-top: .8mm; color: var(--muted); font-size: 6.5pt; }
+
+@media print {
+  body { background: none; }
+  .toolbar { display: none; }
+  .sheet { margin: 0; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span>Тейбл-тент A6 · 2 стороны</span>
+  <button type="button" onclick="window.print()">Печать</button>
+</div>
+
+<section class="sheet">
+  <div class="brand">
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI2MCIgZmlsbD0iI2I1NTMyYSIvPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjUyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmNmU3ZDMiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iLjU1Ii8+CiAgPGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjZlN2QzIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgICA8cGF0aCBkPSJNNDggNDBjLTQtNiA0LTkgMC0xNSIvPgogICAgPHBhdGggZD0iTTYwIDM4Yy00LTYgNC05IDAtMTUiLz4KICAgIDxwYXRoIGQ9Ik03MiA0MGMtNC02IDQtOSAwLTE1Ii8+CiAgPC9nPgogIDxwYXRoIGQ9Ik0zNCA1Mmg1MnYxNGEyMiAyMiAwIDAgMS0yMiAyMmgtOGEyMiAyMiAwIDAgMS0yMi0yMnoiIGZpbGw9IiNmNmU3ZDMiLz4KICA8cGF0aCBkPSJNODYgNTZoNGE4IDggMCAwIDEgMCAxNmgtNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjZlN2QzIiBzdHJva2Utd2lkdGg9IjUiLz4KICA8cGF0aCBkPSJNNDIgNjZjOCA2IDI4IDYgMzYgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjU1MzJhIiBzdHJva2Utd2lkdGg9IjMuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHJlY3QgeD0iMzAiIHk9IjkyIiB3aWR0aD0iNjAiIGhlaWdodD0iNSIgcng9IjIuNSIgZmlsbD0iI2Y2ZTdkMyIvPgo8L3N2Zz4K" alt="">
+    <div class="brand__name">Кофейня «Корица»</div>
+  </div>
+  <div class="cta">
+    <div class="cta__title">Меню</div>
+    <div class="cta__sub">Наведите камеру телефона на QR-код</div>
+    <div class="cta__en">Menu · Point your phone camera at the QR code</div>
+  </div>
+  <div class="qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h29v29H0z"/><path stroke="#000000" d="M0 0.5h7m1 0h1m4 0h3m3 0h2m1 0h7M0 1.5h1m5 0h1m1 0h1m1 0h2m1 0h1m2 0h3m1 0h1m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m3 0h1m1 0h1m3 0h1m1 0h1m3 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h4m2 0h2m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1m2 0h1m2 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m3 0h1m2 0h1m1 0h5m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m2 0h2m2 0h5M0 8.5h1m1 0h2m1 0h3m1 0h2m1 0h2m1 0h4m3 0h1m2 0h1m1 0h2M0 9.5h3m1 0h2m1 0h2m1 0h6m2 0h2m1 0h2m1 0h1m3 0h1M2 10.5h1m1 0h1m1 0h4m2 0h2m2 0h3m2 0h2m3 0h2M2 11.5h2m3 0h1m2 0h2m3 0h1m3 0h2m2 0h1m4 0h1M3 12.5h1m2 0h1m2 0h3m2 0h1m2 0h1m5 0h1m1 0h2M0 13.5h2m1 0h1m3 0h3m2 0h1m1 0h2m1 0h1m1 0h1m2 0h1m3 0h3M0 14.5h2m4 0h3m1 0h1m2 0h1m4 0h2m1 0h2m1 0h1m1 0h3M1 15.5h3m1 0h1m1 0h1m2 0h3m1 0h3m3 0h1m2 0h1m3 0h1M0 16.5h1m5 0h3m1 0h2m2 0h1m3 0h4m1 0h3m1 0h1M5 17.5h1m3 0h3m2 0h2m1 0h1m2 0h2m1 0h1m1 0h3M0 18.5h1m2 0h1m1 0h3m3 0h5m5 0h4m1 0h1M2 19.5h1m2 0h1m1 0h2m2 0h1m1 0h6m1 0h1m5 0h1M1 20.5h2m1 0h1m1 0h1m2 0h1m3 0h2m1 0h11M8 21.5h2m2 0h1m3 0h5m3 0h5M0 22.5h7m1 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1m1 0h2m1 0h1M0 23.5h1m5 0h1m1 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h1m3 0h2M0 24.5h1m1 0h3m1 0h1m8 0h1m1 0h2m1 0h5m1 0h2M0 25.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h2m2 0h3m1 0h3m2 0h1M0 26.5h1m1 0h3m1 0h1m1 0h1m2 0h3m4 0h1m1 0h1m2 0h1m2 0h1m1 0h1M0 27.5h1m5 0h1m5 0h3m5 0h2m1 0h3m1 0h1M0 28.5h7m1 0h4m1 0h1m4 0h4m2 0h1m2 0h1"/></svg>
+</div>
+  <div class="url">menu.example.ru/demo-cafe</div>
+  <div class="wifi">
+  <div class="wifi__qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h29v29H0z"/><path stroke="#000000" d="M0 0.5h7m2 0h4m7 0h1m1 0h7M0 1.5h1m5 0h1m2 0h1m2 0h2m1 0h3m4 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1m4 0h2m1 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h5m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h3m1 0h1m3 0h1m3 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h6m3 0h1m2 0h1m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h2m4 0h1m1 0h1m2 0h2M0 8.5h1m1 0h5m6 0h1m1 0h2m3 0h1m1 0h5M0 9.5h5m2 0h1m2 0h3m3 0h1m1 0h3m1 0h1m2 0h1m2 0h1M0 10.5h2m1 0h1m1 0h2m3 0h2m1 0h1m3 0h2m5 0h1m1 0h1m1 0h1M0 11.5h4m4 0h1m3 0h1m1 0h1m1 0h2m2 0h6m2 0h1M0 12.5h2m2 0h1m1 0h2m1 0h4m1 0h5m1 0h1m1 0h1m2 0h4M1 13.5h1m1 0h1m3 0h2m1 0h2m3 0h2m2 0h2m1 0h1m2 0h4M0 14.5h2m2 0h1m1 0h3m1 0h4m5 0h2m2 0h1m2 0h1M1 15.5h5m1 0h3m1 0h1m1 0h2m1 0h1m3 0h1m1 0h1m1 0h3M0 16.5h3m1 0h1m1 0h2m3 0h3m1 0h2m1 0h1m1 0h2m1 0h1m2 0h1M0 17.5h3m1 0h1m2 0h1m1 0h1m1 0h2m1 0h2m2 0h1m2 0h2m1 0h2m1 0h2M0 18.5h1m3 0h1m1 0h1m2 0h1m1 0h3m1 0h1m1 0h2m4 0h2m2 0h1M0 19.5h1m1 0h1m1 0h2m2 0h1m1 0h5m1 0h2m1 0h7m2 0h1M0 20.5h1m1 0h5m1 0h1m1 0h4m1 0h1m1 0h2m1 0h5m1 0h3M8 21.5h1m1 0h1m3 0h1m1 0h1m1 0h3m3 0h3M0 22.5h7m4 0h1m5 0h1m1 0h2m1 0h1m1 0h3M0 23.5h1m5 0h1m1 0h1m1 0h2m4 0h1m1 0h1m1 0h1m3 0h2M0 24.5h1m1 0h3m1 0h1m1 0h2m1 0h2m2 0h1m1 0h2m1 0h5M0 25.5h1m1 0h3m1 0h1m1 0h1m2 0h1m4 0h1m2 0h5m3 0h1M0 26.5h1m1 0h3m1 0h1m1 0h2m1 0h3m3 0h1m1 0h1m6 0h2M0 27.5h1m5 0h1m2 0h1m1 0h2m3 0h3m4 0h1m3 0h2M0 28.5h7m1 0h1m1 0h1m1 0h1m2 0h2m1 0h2m2 0h1m1 0h2m1 0h1"/></svg>
+</div>
+  <div>
+    <div class="wifi__title">Wi-Fi</div>
+    <div class="wifi__row"><span>Сеть / Network:</span> <b>Koritsa_Guest</b></div>
+    <div class="wifi__row"><span>Пароль / Password:</span> <b>cinnamon2024</b></div>
+    <div class="wifi__hint">Отсканируйте, чтобы подключиться / Scan to connect</div>
+  </div>
+</div>
+</section>
+<section class="sheet">
+  <div class="brand">
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIj4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI2MCIgZmlsbD0iI2I1NTMyYSIvPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iNjAiIHI9IjUyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmNmU3ZDMiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iLjU1Ii8+CiAgPGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjZlN2QzIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgICA8cGF0aCBkPSJNNDggNDBjLTQtNiA0LTkgMC0xNSIvPgogICAgPHBhdGggZD0iTTYwIDM4Yy00LTYgNC05IDAtMTUiLz4KICAgIDxwYXRoIGQ9Ik03MiA0MGMtNC02IDQtOSAwLTE1Ii8+CiAgPC9nPgogIDxwYXRoIGQ9Ik0zNCA1Mmg1MnYxNGEyMiAyMiAwIDAgMS0yMiAyMmgtOGEyMiAyMiAwIDAgMS0yMi0yMnoiIGZpbGw9IiNmNmU3ZDMiLz4KICA8cGF0aCBkPSJNODYgNTZoNGE4IDggMCAwIDEgMCAxNmgtNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjZlN2QzIiBzdHJva2Utd2lkdGg9IjUiLz4KICA8cGF0aCBkPSJNNDIgNjZjOCA2IDI4IDYgMzYgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYjU1MzJhIiBzdHJva2Utd2lkdGg9IjMuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHJlY3QgeD0iMzAiIHk9IjkyIiB3aWR0aD0iNjAiIGhlaWdodD0iNSIgcng9IjIuNSIgZmlsbD0iI2Y2ZTdkMyIvPgo8L3N2Zz4K" alt="">
+    <div class="brand__name">Кофейня «Корица»</div>
+  </div>
+  <div class="cta">
+    <div class="cta__title">Меню</div>
+    <div class="cta__sub">Наведите камеру телефона на QR-код</div>
+    <div class="cta__en">Menu · Point your phone camera at the QR code</div>
+  </div>
+  <div class="qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h29v29H0z"/><path stroke="#000000" d="M0 0.5h7m1 0h1m4 0h3m3 0h2m1 0h7M0 1.5h1m5 0h1m1 0h1m1 0h2m1 0h1m2 0h3m1 0h1m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m3 0h1m1 0h1m3 0h1m1 0h1m3 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h4m2 0h2m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m2 0h2m1 0h1m1 0h1m1 0h1m2 0h1m2 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m3 0h1m2 0h1m1 0h5m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m2 0h2m2 0h5M0 8.5h1m1 0h2m1 0h3m1 0h2m1 0h2m1 0h4m3 0h1m2 0h1m1 0h2M0 9.5h3m1 0h2m1 0h2m1 0h6m2 0h2m1 0h2m1 0h1m3 0h1M2 10.5h1m1 0h1m1 0h4m2 0h2m2 0h3m2 0h2m3 0h2M2 11.5h2m3 0h1m2 0h2m3 0h1m3 0h2m2 0h1m4 0h1M3 12.5h1m2 0h1m2 0h3m2 0h1m2 0h1m5 0h1m1 0h2M0 13.5h2m1 0h1m3 0h3m2 0h1m1 0h2m1 0h1m1 0h1m2 0h1m3 0h3M0 14.5h2m4 0h3m1 0h1m2 0h1m4 0h2m1 0h2m1 0h1m1 0h3M1 15.5h3m1 0h1m1 0h1m2 0h3m1 0h3m3 0h1m2 0h1m3 0h1M0 16.5h1m5 0h3m1 0h2m2 0h1m3 0h4m1 0h3m1 0h1M5 17.5h1m3 0h3m2 0h2m1 0h1m2 0h2m1 0h1m1 0h3M0 18.5h1m2 0h1m1 0h3m3 0h5m5 0h4m1 0h1M2 19.5h1m2 0h1m1 0h2m2 0h1m1 0h6m1 0h1m5 0h1M1 20.5h2m1 0h1m1 0h1m2 0h1m3 0h2m1 0h11M8 21.5h2m2 0h1m3 0h5m3 0h5M0 22.5h7m1 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1m1 0h2m1 0h1M0 23.5h1m5 0h1m1 0h1m1 0h2m1 0h2m1 0h1m1 0h1m1 0h1m3 0h2M0 24.5h1m1 0h3m1 0h1m8 0h1m1 0h2m1 0h5m1 0h2M0 25.5h1m1 0h3m1 0h1m1 0h2m2 0h2m1 0h2m2 0h3m1 0h3m2 0h1M0 26.5h1m1 0h3m1 0h1m1 0h1m2 0h3m4 0h1m1 0h1m2 0h1m2 0h1m1 0h1M0 27.5h1m5 0h1m5 0h3m5 0h2m1 0h3m1 0h1M0 28.5h7m1 0h4m1 0h1m4 0h4m2 0h1m2 0h1"/></svg>
+</div>
+  <div class="url">menu.example.ru/demo-cafe</div>
+  <div class="wifi">
+  <div class="wifi__qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h29v29H0z"/><path stroke="#000000" d="M0 0.5h7m2 0h4m7 0h1m1 0h7M0 1.5h1m5 0h1m2 0h1m2 0h2m1 0h3m4 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m1 0h3m1 0h1m4 0h2m1 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h5m2 0h1m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h3m1 0h1m3 0h1m3 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h6m3 0h1m2 0h1m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h2m4 0h1m1 0h1m2 0h2M0 8.5h1m1 0h5m6 0h1m1 0h2m3 0h1m1 0h5M0 9.5h5m2 0h1m2 0h3m3 0h1m1 0h3m1 0h1m2 0h1m2 0h1M0 10.5h2m1 0h1m1 0h2m3 0h2m1 0h1m3 0h2m5 0h1m1 0h1m1 0h1M0 11.5h4m4 0h1m3 0h1m1 0h1m1 0h2m2 0h6m2 0h1M0 12.5h2m2 0h1m1 0h2m1 0h4m1 0h5m1 0h1m1 0h1m2 0h4M1 13.5h1m1 0h1m3 0h2m1 0h2m3 0h2m2 0h2m1 0h1m2 0h4M0 14.5h2m2 0h1m1 0h3m1 0h4m5 0h2m2 0h1m2 0h1M1 15.5h5m1 0h3m1 0h1m1 0h2m1 0h1m3 0h1m1 0h1m1 0h3M0 16.5h3m1 0h1m1 0h2m3 0h3m1 0h2m1 0h1m1 0h2m1 0h1m2 0h1M0 17.5h3m1 0h1m2 0h1m1 0h1m1 0h2m1 0h2m2 0h1m2 0h2m1 0h2m1 0h2M0 18.5h1m3 0h1m1 0h1m2 0h1m1 0h3m1 0h1m1 0h2m4 0h2m2 0h1M0 19.5h1m1 0h1m1 0h2m2 0h1m1 0h5m1 0h2m1 0h7m2 0h1M0 20.5h1m1 0h5m1 0h1m1 0h4m1 0h1m1 0h2m1 0h5m1 0h3M8 21.5h1m1 0h1m3 0h1m1 0h1m1 0h3m3 0h3M0 22.5h7m4 0h1m5 0h1m1 0h2m1 0h1m1 0h3M0 23.5h1m5 0h1m1 0h1m1 0h2m4 0h1m1 0h1m1 0h1m3 0h2M0 24.5h1m1 0h3m1 0h1m1 0h2m1 0h2m2 0h1m1 0h2m1 0h5M0 25.5h1m1 0h3m1 0h1m1 0h1m2 0h1m4 0h1m2 0h5m3 0h1M0 26.5h1m1 0h3m1 0h1m1 0h2m1 0h3m3 0h1m1 0h1m6 0h2M0 27.5h1m5 0h1m2 0h1m1 0h2m3 0h3m4 0h1m3 0h2M0 28.5h7m1 0h1m1 0h1m1 0h1m2 0h2m1 0h2m2 0h1m1 0h2m1 0h1"/></svg>
+</div>
+  <div>
+    <div class="wifi__title">Wi-Fi</div>
+    <div class="wifi__row"><span>Сеть / Network:</span> <b>Koritsa_Guest</b></div>
+    <div class="wifi__row"><span>Пароль / Password:</span> <b>cinnamon2024</b></div>
+    <div class="wifi__hint">Отсканируйте, чтобы подключиться / Scan to connect</div>
+  </div>
+</div>
+</section>
+
+</body>
+</html>

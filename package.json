@@ -1,0 +1,18 @@
+{
+  "name": "qr-menu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Генератор QR-меню для кафе и ресторанов: menu.json → готовая страница, QR-код и тейбл-тент",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "new": "node scripts/new.js",
+    "preview": "node scripts/preview.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "qrcode": "^1.5.4"
+  }
+}

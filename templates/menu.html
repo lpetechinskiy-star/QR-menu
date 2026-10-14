@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="{{lang}}" data-lang="{{lang}}" data-theme="{{theme}}"{{htmlAttrs}}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+{{robots}}
+<meta name="theme-color" content="{{themeColor}}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+{{ogExtra}}
+{{favicon}}
+<style>{{css}}</style>
+<script>
+/* До отрисовки: язык (сохранённый выбор или язык браузера) и ?theme= для превью тем */
+(function(r){
+  if (r.hasAttribute('data-bilingual')) {
+    var l; try { l = localStorage.getItem('qrmenu-lang'); } catch (e) {}
+    if (l !== 'ru' && l !== 'en') l = /^(ru|uk|be|kk)/i.test(navigator.language || '') ? 'ru' : 'en';
+    r.setAttribute('data-lang', l); r.setAttribute('lang', l);
+    var t = r.getAttribute('data-title-' + l); if (t) document.title = t;
+  }
+  var m = /[?&]theme=(light|dark|warm)\b/.exec(location.search);
+  if (m) r.setAttribute('data-theme', m[1]);
+})(document.documentElement);
+</script>
+</head>
+<body>
+{{icons}}
+
+<header class="hero">
+  {{langSwitch}}
+  {{logo}}
+  <h1 class="hero__name">{{name}}</h1>
+  {{tagline}}
+  {{actions}}
+</header>
+
+<nav class="nav" aria-label="Menu">
+  <div class="nav__inner">{{nav}}</div>
+</nav>
+
+<main>
+{{sections}}
+{{info}}
+</main>
+
+<footer class="footer">{{footer}}</footer>
+
+<script>{{js}}</script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+{
+  "name": "Кофейня «Корица»",
+  "name_en": "Koritsa Coffee & Kitchen",
+  "tagline": "Завтраки весь день, свежая выпечка и спешелти-кофе",
+  "tagline_en": "All-day breakfast, fresh pastries and specialty coffee",
+  "logo": "logo.svg",
+
+  "url": "https://menu.example.ru/demo-cafe/",
+  "theme": "warm",
+  "noindex": true,
+  "defaultLang": "ru",
+  "currency": "₽",
+
+  "phone": "+7 (900) 123-45-67",
+  "booking": "https://t.me/koritsa_demo",
+  "address": "Москва, ул. Садовая, 12",
+  "address_en": "12 Sadovaya St, Moscow",
+  "maps": {
+    "yandex": "https://yandex.ru/maps/?text=Москва%2C%20ул.%20Садовая%2C%2012",
+    "2gis": "https://2gis.ru/moscow/search/Садовая%2012"
+  },
+  "hours": [
+    { "days": "Пн–Пт", "days_en": "Mon–Fri", "time": "08:00–22:00" },
+    { "days": "Сб–Вс", "days_en": "Sat–Sun", "time": "09:00–23:00" }
+  ],
+  "wifi": {
+    "network": "Koritsa_Guest",
+    "password": "cinnamon2024"
+  },
+  "socials": {
+    "telegram": "https://t.me/koritsa_demo",
+    "vk": "https://vk.com/koritsa_demo",
+    "instagram": "https://instagram.com/koritsa_demo",
+    "website": "https://example.com"
+  },
+
+  "sections": [
+    {
+      "title": "Завтраки",
+      "title_en": "Breakfast",
+      "note": "Подаём весь день",
+      "note_en": "Served all day",
+      "items": [
+        {
+          "name": "Сырники со сметаной",
+          "name_en": "Syrniki with sour cream",
+          "description": "Три пышных сырника из фермерского творога, сметана и ягодный соус",
+          "description_en": "Three fluffy farmer's cheese pancakes, sour cream and berry sauce",
+          "weight": "220 г",
+          "price": 390,
+          "tags": ["hit", "veg"]
+        },
+        {
+          "name": "Скрэмбл с лососем",
+          "name_en": "Scrambled eggs with salmon",
+          "description": "Нежный скрэмбл на сливочном масле, слабосолёный лосось, тост из чиабатты",
+          "description_en": "Buttery scrambled eggs, lightly salted salmon, ciabatta toast",
+          "weight": "250 г",
+          "price": 520
+        },
+        {
+          "name": "Шакшука",
+          "name_en": "Shakshuka",
+          "description": "Яйца, запечённые в томатах с перцем и специями, фета, зелень, лепёшка",
+          "description_en": "Eggs baked in spiced tomato and pepper sauce, feta, herbs, flatbread",
+          "weight": "320 г",
+          "price": 450,
+          "tags": ["spicy", "veg"]
+        },
+        {
+          "name": "Овсяная каша",
+          "name_en": "Oatmeal porridge",
+          "description": "На молоке или на воде — на выбор, с бананом, мёдом и грецким орехом",
+          "description_en": "With milk or water, banana, honey and walnuts",
+          "weight": "280 г",
+          "price": 280,
+          "tags": ["veg"]
+        },
+        {
+          "name": "Круассан с ветчиной и сыром",
+          "name_en": "Ham & cheese croissant",
+          "description": "Тёплый слоёный круассан, ветчина, эмменталь, соус бешамель",
+          "description_en": "Warm flaky croissant, ham, emmental, béchamel",
+          "weight": "180 г",
+          "price": 340,
+          "tags": ["new"]
+        }
+      ]
+    },
+    {
+      "title": "Супы и основные блюда",
+      "title_en": "Soups & Mains",
+      "items": [
+        {
+          "name": "Тыквенный крем-суп",
+          "name_en": "Pumpkin cream soup",
+          "description": "С кокосовым молоком, тыквенными семечками и гренками",
+          "description_en": "With coconut milk, pumpkin seeds and croutons",
+          "weight": "300 мл",
+          "price": 360,
+          "tags": ["veg"]
+        },
+        {
+          "name": "Борщ с говядиной",
+          "name_en": "Beef borscht",
+          "description": "По домашнему рецепту, со сметаной и бородинским хлебом",
+          "description_en": "Home-style recipe, served with sour cream and rye bread",
+          "weight": "350 мл",
+          "price": 420,
+          "tags": ["hit"]
+        },
+        {
+          "name": "Боул с киноа и курицей",
+          "name_en": "Quinoa & chicken bowl",
+          "description": "Курица гриль, киноа, авокадо, эдамаме, огурец, кунжутная заправка",
+          "description_en": "Grilled chicken, quinoa, avocado, edamame, cucumber, sesame dressing",
+          "weight": "340 г",
+          "price": 590
+        },
+        {
+          "name": "Паста карбонара",
+          "name_en": "Pasta carbonara",
+          "description": "Спагетти, гуанчиале, желток, пекорино романо, чёрный перец",
+          "description_en": "Spaghetti, guanciale, egg yolk, pecorino romano, black pepper",
+          "weight": "290 г",
+          "price": 610
+        },
+        {
+          "name": "Бургер «Корица»",
+          "name_en": "Koritsa burger",
+          "description": "Говяжья котлета, чеддер, карамелизированный лук, халапеньо, картофель фри",
+          "description_en": "Beef patty, cheddar, caramelized onion, jalapeño, french fries",
+          "weight": "420 г",
+          "price": 690,
+          "tags": ["spicy", "hit"]
+        }
+      ]
+    },
+    {
+      "title": "Десерты",
+      "title_en": "Desserts",
+      "items": [
+        {
+          "name": "Синнабон",
+          "name_en": "Cinnamon roll",
+          "description": "Фирменная булочка с корицей и сливочным крем-чизом — в честь нашего названия",
+          "description_en": "Our signature cinnamon roll with cream cheese frosting",
+          "weight": "150 г",
+          "price": 260,
+          "tags": ["hit"]
+        },
+        {
+          "name": "Чизкейк Сан-Себастьян",
+          "name_en": "Basque cheesecake",
+          "description": "Обожжённая корочка и кремовая середина",
+          "description_en": "Burnt top, creamy center",
+          "weight": "130 г",
+          "price": 380
+        },
+        {
+          "name": "Морковный торт",
+          "name_en": "Carrot cake",
+          "description": "С грецким орехом, изюмом и сливочным кремом",
+          "description_en": "With walnuts, raisins and cream cheese frosting",
+          "weight": "140 г",
+          "price": 340
+        },
+        {
+          "name": "Тирамису",
+          "name_en": "Tiramisu",
+          "description": "Савоярди, маскарпоне, эспрессо, какао",
+          "description_en": "Savoiardi, mascarpone, espresso, cocoa",
+          "weight": "150 г",
+          "price": 390
+        },
+        {
+          "name": "Шарик мороженого",
+          "name_en": "Ice cream scoop",
+          "description": "Ваниль, шоколад или солёная карамель",
+          "description_en": "Vanilla, chocolate or salted caramel",
+          "weight": "50 г",
+          "price": 120,
+          "available": false
+        }
+      ]
+    },
+    {
+      "title": "Кофе и напитки",
+      "title_en": "Coffee & Drinks",
+      "note": "Альтернативное молоко (овсяное, миндальное) — +60 ₽",
+      "note_en": "Plant milk (oat, almond) — +60 ₽",
+      "items": [
+        {
+          "name": "Эспрессо",
+          "name_en": "Espresso",
+          "description": "Зерно недели от локальной обжарки",
+          "description_en": "Bean of the week from a local roaster",
+          "weight": "30 мл",
+          "price": 160
+        },
+        {
+          "name": "Капучино",
+          "name_en": "Cappuccino",
+          "variants": [
+            { "name": "250 мл", "name_en": "250 ml", "price": 220 },
+            { "name": "350 мл", "name_en": "350 ml", "price": 270 }
+          ]
+        },
+        {
+          "name": "Раф «Корица»",
+          "name_en": "Cinnamon raf",
+          "description": "Сливки, эспрессо, корица и ванильный сахар",
+          "description_en": "Cream, espresso, cinnamon and vanilla sugar",
+          "variants": [
+            { "name": "250 мл", "name_en": "250 ml", "price": 290 },
+            { "name": "350 мл", "name_en": "350 ml", "price": 340 }
+          ],
+          "tags": ["hit"]
+        },
+        {
+          "name": "Матча латте",
+          "name_en": "Matcha latte",
+          "description": "Японский чай матча на молоке",
+          "description_en": "Japanese matcha green tea with milk",
+          "weight": "300 мл",
+          "price": 310
+        },
+        {
+          "name": "Лимонад облепиха–маракуйя",
+          "name_en": "Sea buckthorn & passion fruit lemonade",
+          "description": "Домашний лимонад, подаём со льдом",
+          "description_en": "Homemade lemonade served over ice",
+          "weight": "400 мл",
+          "price": 290,
+          "tags": ["new"]
+        }
+      ]
+    }
+  ]
+}
