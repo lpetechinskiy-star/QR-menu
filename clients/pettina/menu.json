@@ -1,16 +1,18 @@
 {
   "_note": "Сайт pettina.ru недоступен из среды сборки — данные из поисковых выдержек pettina.ru и Zoon. Супы и десерты — заглушки.",
   "name": "Петтина",
+  "name_en": "Pettina",
   "tagline": "Кафе-бар · шашлык на углях",
   "logo": "logo.svg",
-  "_logo_note": "заглушка",
+  "_logo_note": "монограмма в цветах страницы: фирменный логотип получить не удалось",
   "theme": "dark",
   "currency": "₽",
-  "phone": "+7 (495) 686-65-31",
+  "phone": "+7 (495) 686-55-31",
   "address": "Москва, ул. Космонавтов, 2А",
   "hours": [
     {
       "days": "Ежедневно",
+      "days_en": "Daily",
       "time": "11:00–02:00"
     }
   ],
@@ -25,24 +27,33 @@
           "tags": [
             "hit"
           ],
-          "_source": "pettina.ru (выдержка поиска)"
+          "_source": "pettina.ru (выдержка поиска)",
+          "weight": "200 г",
+          "name_en": "Caesar salad with chicken"
         },
         {
           "name": "Цезарь с сёмгой",
-          "price": 670,
-          "_source": "pettina.ru (выдержка поиска)"
+          "price": 730,
+          "_source": "pettina.ru (выдержка поиска)",
+          "weight": "200 г",
+          "name_en": "Caesar salad with salmon"
         },
         {
           "name": "Греческий",
-          "price": 420,
-          "_source": "pettina.ru (выдержка поиска)"
+          "price": 480,
+          "_source": "pettina.ru (выдержка поиска)",
+          "weight": "200 г",
+          "name_en": "Greek salad"
         },
         {
           "name": "Оливье с говядиной",
-          "price": 390,
-          "_source": "pettina.ru (выдержка поиска)"
+          "price": 490,
+          "_source": "pettina.ru (выдержка поиска)",
+          "weight": "170 г",
+          "name_en": "Olivier salad with beef"
         }
-      ]
+      ],
+      "title_en": "Salads"
     },
     {
       "title": "Супы",
@@ -50,7 +61,8 @@
         {
           "name": "Солянка мясная",
           "price": 420,
-          "_stub": true
+          "_stub": true,
+          "name_en": "Meat solyanka"
         },
         {
           "name": "Харчо",
@@ -58,19 +70,23 @@
           "tags": [
             "spicy"
           ],
-          "_stub": true
+          "_stub": true,
+          "name_en": "Kharcho"
         },
         {
           "name": "Борщ со сметаной",
           "price": 370,
-          "_stub": true
+          "_stub": true,
+          "name_en": "Borscht with sour cream"
         },
         {
           "name": "Куриный суп с лапшой",
           "price": 330,
-          "_stub": true
+          "_stub": true,
+          "name_en": "Chicken noodle soup"
         }
-      ]
+      ],
+      "title_en": "Soups"
     },
     {
       "title": "Шашлык на углях",
@@ -81,34 +97,42 @@
           "tags": [
             "hit"
           ],
-          "_source": "pettina.ru (выдержка поиска)"
+          "_source": "pettina.ru (выдержка поиска)",
+          "name_en": "Lamb loin shashlik"
         },
         {
           "name": "Шашлык из свиной шейки",
-          "price": 480,
-          "_source": "pettina.ru (выдержка поиска)"
+          "price": 550,
+          "_source": "pettina.ru (выдержка поиска)",
+          "weight": "150/15 г",
+          "name_en": "Pork neck shashlik"
         },
         {
           "name": "Шашлык из свиной корейки",
           "price": 430,
-          "_source": "pettina.ru (выдержка поиска)"
+          "_source": "pettina.ru (выдержка поиска)",
+          "name_en": "Pork loin shashlik"
         },
         {
           "name": "Шашлык из куриной грудки",
           "price": 400,
-          "_source": "pettina.ru (выдержка поиска)"
+          "_source": "pettina.ru (выдержка поиска)",
+          "name_en": "Chicken breast shashlik"
         },
         {
           "name": "Люля-кебаб",
           "price": 420,
-          "_source": "pettina.ru (выдержка поиска)"
+          "_source": "pettina.ru (выдержка поиска)",
+          "name_en": "Lula kebab"
         },
         {
           "name": "Шашлычное ассорти",
           "description": "На большую компанию",
           "weight": "1500 г",
           "price": 4900,
-          "_source": "pettina.ru (выдержка поиска)"
+          "_source": "pettina.ru (выдержка поиска)",
+          "name_en": "Shashlik platter",
+          "description_en": "For a big company"
         },
         {
           "name": "Картофель бэби на углях",
@@ -116,7 +140,8 @@
           "tags": [
             "veg"
           ],
-          "_source": "pettina.ru (выдержка поиска)"
+          "_source": "pettina.ru (выдержка поиска)",
+          "name_en": "Charcoal-grilled baby potatoes"
         },
         {
           "name": "Шампиньоны на углях",
@@ -124,9 +149,11 @@
           "tags": [
             "veg"
           ],
-          "_source": "pettina.ru (выдержка поиска)"
+          "_source": "pettina.ru (выдержка поиска)",
+          "name_en": "Charcoal-grilled mushrooms"
         }
-      ]
+      ],
+      "title_en": "Charcoal-grilled shashlik"
     },
     {
       "title": "Блюда из мяса",
@@ -134,29 +161,35 @@
         {
           "name": "Стейк из мраморной говядины с рисом",
           "price": 1950,
-          "_source": "pettina.ru (выдержка поиска)"
+          "_source": "pettina.ru (выдержка поиска)",
+          "name_en": "Marbled beef steak with rice"
         },
         {
           "name": "Цыплёнок табака",
           "price": 750,
-          "_source": "zoon.ru (выдержка поиска)"
+          "_source": "zoon.ru (выдержка поиска)",
+          "name_en": "Chicken tabaka"
         },
         {
           "name": "Бефстроганов",
           "price": 690,
-          "_source": "zoon.ru (выдержка поиска)"
+          "_source": "zoon.ru (выдержка поиска)",
+          "name_en": "Beef stroganoff"
         },
         {
           "name": "Жаркое по-русски",
           "price": 580,
-          "_source": "zoon.ru (выдержка поиска)"
+          "_source": "zoon.ru (выдержка поиска)",
+          "name_en": "Russian-style pot roast"
         },
         {
           "name": "Плов «Узбекский»",
           "price": 450,
-          "_source": "pettina.ru (выдержка поиска)"
+          "_source": "pettina.ru (выдержка поиска)",
+          "name_en": "Uzbek plov"
         }
-      ]
+      ],
+      "title_en": "Meat dishes"
     },
     {
       "title": "Десерты",
@@ -164,24 +197,36 @@
         {
           "name": "Медовик",
           "price": 350,
-          "_stub": true
+          "_stub": true,
+          "name_en": "Honey cake"
         },
         {
           "name": "Наполеон",
           "price": 350,
-          "_stub": true
+          "_stub": true,
+          "name_en": "Napoleon cake"
         },
         {
           "name": "Чизкейк Нью-Йорк",
           "price": 390,
-          "_stub": true
+          "_stub": true,
+          "name_en": "New York cheesecake"
         },
         {
           "name": "Мороженое (3 шарика)",
           "price": 290,
-          "_stub": true
+          "_stub": true,
+          "name_en": "Ice cream (3 scoops)"
         }
-      ]
+      ],
+      "title_en": "Desserts"
     }
-  ]
+  ],
+  "booking": {
+    "type": "phone",
+    "value": "+7 (495) 686-55-31"
+  },
+  "tagline_en": "Café-bar · charcoal-grilled shashlik",
+  "address_en": "2A Kosmonavtov St, Moscow",
+  "defaultLang": "ru"
 }

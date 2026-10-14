@@ -1,9 +1,10 @@
 {
   "_note": "siciliaresto.ru недоступен из среды сборки: меню — с Zoon, десерты — заглушка; цвета и логотип — заглушки.",
   "name": "Сицилия",
+  "name_en": "Sicilia",
   "tagline": "Итальянский ресторан у ВДНХ",
   "logo": "logo.svg",
-  "_logo_note": "заглушка: фирменный логотип с siciliaresto.ru получить не удалось",
+  "_logo_note": "монограмма в цветах страницы: фирменный логотип получить не удалось",
   "theme": "light",
   "accentColor": "#1f4e5f",
   "_accent_note": "заглушка: цвета сайта получить не удалось",
@@ -18,6 +19,7 @@
   "hours": [
     {
       "days": "Ежедневно",
+      "days_en": "Daily",
       "time": "11:00–23:00"
     }
   ],
@@ -29,18 +31,21 @@
           "name": "Брускетта с маринованным лососем",
           "weight": "150 г",
           "price": 420,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Bruschetta with marinated salmon"
         },
         {
           "name": "Карпаччо из говядины",
           "weight": "110 г",
           "price": 690,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Beef carpaccio"
         },
         {
           "name": "Сырная тарелка к вину",
           "price": 720,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Cheese platter for wine"
         },
         {
           "name": "Фокачча",
@@ -48,9 +53,11 @@
           "tags": [
             "veg"
           ],
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Focaccia"
         }
-      ]
+      ],
+      "title_en": "Starters"
     },
     {
       "title": "Салаты",
@@ -62,26 +69,31 @@
           "tags": [
             "hit"
           ],
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Caesar salad with chicken"
         },
         {
           "name": "Салат с лососем и киноа",
           "weight": "195 г",
           "price": 690,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Salmon & quinoa salad"
         },
         {
           "name": "Салат с ростбифом",
           "weight": "150 г",
           "price": 640,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Roast beef salad"
         },
         {
           "name": "Пастуший салат",
           "price": 540,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Shepherd's salad"
         }
-      ]
+      ],
+      "title_en": "Salads"
     },
     {
       "title": "Паста",
@@ -93,19 +105,22 @@
           "tags": [
             "hit"
           ],
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Carbonara"
         },
         {
           "name": "Болоньезе",
           "weight": "250 г",
           "price": 560,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Bolognese"
         },
         {
           "name": "Паста с лососем и овощами",
           "weight": "250 г",
           "price": 650,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Pasta with salmon & vegetables"
         },
         {
           "name": "Паста «Четыре сыра»",
@@ -114,9 +129,11 @@
           "tags": [
             "veg"
           ],
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Four cheese pasta"
         }
-      ]
+      ],
+      "title_en": "Pasta"
     },
     {
       "title": "Пицца",
@@ -129,7 +146,9 @@
           "tags": [
             "veg"
           ],
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Margherita",
+          "description_en": "Tomato sauce, mozzarella, basil"
         },
         {
           "name": "Пепперони",
@@ -139,22 +158,28 @@
           "tags": [
             "hit"
           ],
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Pepperoni",
+          "description_en": "Tomato sauce, mozzarella, salame calabrese"
         },
         {
           "name": "Барбекю",
           "description": "Курица, бекон, моцарелла, грибы, лук",
           "weight": "450 г",
           "price": 720,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "BBQ",
+          "description_en": "Chicken, bacon, mozzarella, mushrooms, onion"
         },
         {
           "name": "Прошутто и руккола",
           "weight": "450 г",
           "price": 780,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Prosciutto & arugula"
         }
-      ]
+      ],
+      "title_en": "Pizza"
     },
     {
       "title": "Горячее",
@@ -162,9 +187,11 @@
         {
           "name": "Филе-миньон",
           "price": 1600,
-          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)"
+          "_source": "zoon.ru, Sicilia на Ярославской (выдержка поиска)",
+          "name_en": "Filet mignon"
         }
-      ]
+      ],
+      "title_en": "Mains"
     },
     {
       "title": "Десерты",
@@ -175,19 +202,26 @@
           "tags": [
             "hit"
           ],
-          "_stub": true
+          "_stub": true,
+          "name_en": "Tiramisu"
         },
         {
           "name": "Панна-котта",
           "price": 360,
-          "_stub": true
+          "_stub": true,
+          "name_en": "Panna cotta"
         },
         {
           "name": "Канноли с рикоттой",
           "price": 340,
-          "_stub": true
+          "_stub": true,
+          "name_en": "Ricotta cannoli"
         }
-      ]
+      ],
+      "title_en": "Desserts"
     }
-  ]
+  ],
+  "tagline_en": "Italian restaurant near VDNKh",
+  "address_en": "13A bld 1 Yaroslavskaya St, Moscow",
+  "defaultLang": "ru"
 }

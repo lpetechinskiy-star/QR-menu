@@ -1,12 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-  <circle cx="60" cy="60" r="60" fill="#f4ede4"/>
-  <g transform="translate(60 46)" fill="#d9a441">
-    <path d="M0 0c-3-10-1-18 0-22 1 4 3 12 0 22z"/>
-    <path d="M0 0c-3-10-1-18 0-22 1 4 3 12 0 22z" transform="rotate(72)"/>
-    <path d="M0 0c-3-10-1-18 0-22 1 4 3 12 0 22z" transform="rotate(144)"/>
-    <path d="M0 0c-3-10-1-18 0-22 1 4 3 12 0 22z" transform="rotate(216)"/>
-    <path d="M0 0c-3-10-1-18 0-22 1 4 3 12 0 22z" transform="rotate(288)"/>
-    <circle r="4" fill="#7a5a3a"/>
-  </g>
-  <text x="60" y="94" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="17" font-weight="700" fill="#4a3a2c">Иланг &amp; Латте</text>
+  <circle cx="60" cy="60" r="60" fill="#2f6b4f"/>
+  <circle cx="60" cy="60" r="53" fill="none" stroke="#ffffff" stroke-width="1.5" opacity=".7"/>
+  <text x="60" y="60" dy=".35em" text-anchor="middle" font-family="Georgia, 'PT Serif', 'Times New Roman', serif" font-size="36" font-weight="700" letter-spacing="-1" fill="#ffffff">И&amp;Л</text>
 </svg>

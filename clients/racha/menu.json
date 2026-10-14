@@ -5,7 +5,7 @@
   "tagline": "Ресторан грузинской кухни у ВДНХ",
   "tagline_en": "Georgian cuisine near VDNKh",
   "logo": "logo.svg",
-  "_logo_note": "заглушка: монограмма, не фирменный логотип",
+  "_logo_note": "монограмма в цветах страницы: фирменный логотип получить не удалось",
   "theme": "warm",
   "defaultLang": "ru",
   "currency": "₽",
@@ -137,7 +137,8 @@
           "tags": [
             "veg"
           ],
-          "_source": "kafe-racha.ru (выдержка поиска)"
+          "_source": "kafe-racha.ru (выдержка поиска)",
+          "weight": "150 г"
         }
       ]
     },
@@ -220,7 +221,8 @@
           "tags": [
             "spicy"
           ],
-          "_source": "kafe-racha.ru (выдержка поиска)"
+          "_source": "kafe-racha.ru (выдержка поиска)",
+          "weight": "250 г"
         },
         {
           "name": "Суп из баранины",
@@ -250,7 +252,8 @@
           "name": "Борщ",
           "name_en": "Borscht",
           "price": 520,
-          "_source": "kafe-racha.ru (выдержка поиска)"
+          "_source": "kafe-racha.ru (выдержка поиска)",
+          "weight": "250 г"
         }
       ]
     },

@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-  <circle cx="60" cy="60" r="60" fill="#151515"/>
-  <circle cx="60" cy="60" r="52" fill="none" stroke="#c8a165" stroke-width="2"/>
-  <text x="60" y="72" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="38" font-weight="800" letter-spacing="1" fill="#f2efe9">VM</text>
-  <rect x="38" y="82" width="44" height="3" rx="1.5" fill="#c8a165"/>
+  <circle cx="60" cy="60" r="60" fill="#1c1c1e"/>
+  <circle cx="60" cy="60" r="53" fill="none" stroke="#dcae5b" stroke-width="1.5" opacity=".7"/>
+  <text x="60" y="60" dy=".35em" text-anchor="middle" font-family="Georgia, 'PT Serif', 'Times New Roman', serif" font-size="42" font-weight="700" letter-spacing="-1" fill="#dcae5b">VM</text>
 </svg>

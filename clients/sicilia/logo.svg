@@ -1,6 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
   <circle cx="60" cy="60" r="60" fill="#1f4e5f"/>
-  <ellipse cx="60" cy="44" rx="16" ry="12" fill="#f2c94c"/>
-  <path d="M60 32c4-6 10-7 14-6-3 4-8 6-14 6z" fill="#5a9b4e"/>
-  <text x="60" y="88" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="25" font-style="italic" font-weight="700" fill="#fdf6e3">Sicilia</text>
+  <circle cx="60" cy="60" r="53" fill="none" stroke="#fdf6e3" stroke-width="1.5" opacity=".7"/>
+  <text x="60" y="60" dy=".35em" text-anchor="middle" font-family="Georgia, 'PT Serif', 'Times New Roman', serif" font-size="60" font-weight="700" letter-spacing="-1" fill="#fdf6e3">S</text>
 </svg>
