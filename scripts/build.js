@@ -33,7 +33,7 @@ const CLIENTS_DIR = path.join(ROOT, 'clients');
 const DIST_DIR = path.join(ROOT, 'dist');
 const TEMPLATES_DIR = path.join(ROOT, 'templates');
 
-const THEMES = ['light', 'dark', 'warm'];
+const THEMES = ['light', 'dark', 'warm', 'ivory'];
 const INLINE_LOGO_MAX_BYTES = 30 * 1024;
 
 /* ------------------------------------------------------------------ */

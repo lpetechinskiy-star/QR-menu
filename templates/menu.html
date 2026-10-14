@@ -23,7 +23,7 @@
     r.setAttribute('data-lang', l); r.setAttribute('lang', l);
     var t = r.getAttribute('data-title-' + l); if (t) document.title = t;
   }
-  var m = /[?&]theme=(light|dark|warm)\b/.exec(location.search);
+  var m = /[?&]theme=(light|dark|warm|ivory)\b/.exec(location.search);
   if (m) r.setAttribute('data-theme', m[1]);
 })(document.documentElement);
 </script>

@@ -57,6 +57,49 @@
   --shadow: 0 1px 2px rgba(90, 50, 20, .05), 0 6px 24px rgba(90, 50, 20, .08);
 }
 
+[data-theme="ivory"] {
+  color-scheme: light;
+  --bg: #f7f3ec;
+  --surface: #fffdf8;
+  --text: #26221e;
+  --muted: #7c7368;
+  --line: #e6ddcf;
+  --chip: #efe8dc;
+  --accent: #7b2331;
+  --accent-ink: #ffffff;
+  --red: #a3322a;
+  --green: #4d6b3c;
+  --blue: #3f5f7f;
+  --shadow: none;
+}
+
+/* Премиальная подача (тема ivory): засечки, воздух, тонкие линии вместо карточек */
+[data-theme="ivory"] .hero { padding-top: 72px; padding-bottom: 30px; }
+[data-theme="ivory"] .hero__name { font-weight: 500; letter-spacing: .01em; }
+[data-theme="ivory"] .hero__tagline { font-style: italic; font-family: var(--font-display); font-size: 17px; }
+[data-theme="ivory"] .btn { border-radius: 14px; font-weight: 600; letter-spacing: .01em; }
+[data-theme="ivory"] .section { padding-top: 44px; }
+[data-theme="ivory"] .section__title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 500;
+  text-align: center;
+}
+[data-theme="ivory"] .section__title::before,
+[data-theme="ivory"] .section__title::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+[data-theme="ivory"] .section__note { margin: 0 0 10px; font-style: italic; text-align: center; }
+[data-theme="ivory"] .list { border: 0; border-radius: 0; background: transparent; }
+[data-theme="ivory"] .dish { padding: 20px 2px; }
+[data-theme="ivory"] .dish + .dish { border-top-color: var(--line); }
+[data-theme="ivory"] .dish__name { font: 600 18.5px/1.25 var(--font-display); letter-spacing: .005em; }
+[data-theme="ivory"] .dish__desc { font-size: 14.5px; line-height: 1.5; }
+[data-theme="ivory"] .price { font: 600 18px/1.2 var(--font-display); }
+[data-theme="ivory"] .card { box-shadow: none; }
+[data-theme="ivory"] .nav a[aria-current="true"] { background: var(--accent); color: var(--accent-ink); }
+
 /* ---------- Язык: показываем только тексты текущего языка ---------- */
 html[data-lang="ru"] .t-en,
 html[data-lang="en"] .t-ru { display: none; }

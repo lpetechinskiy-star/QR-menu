@@ -1,0 +1,454 @@
+{
+  "_note": "osteria-trio.ru и Яндекс Карты недоступны из среды сборки. Реальные позиции — из выдержек поиска (osteria-trio.ru и агрегаторы), см. _source; всё с _stub — заглушки.",
+  "name": "Osteria Trio",
+  "name_en": "Osteria Trio",
+  "tagline": "Итальянская кухня на ВДНХ",
+  "tagline_en": "Italian kitchen at VDNKh",
+  "logo": "logo.svg",
+  "_logo_note": "заглушка: текстовая монограмма в итальянской гамме — логотип с сайта получить не удалось",
+  "theme": "ivory",
+  "_accent_note": "заглушка: бордо из темы ivory — фирменные цвета с сайта получить не удалось",
+  "defaultLang": "ru",
+  "currency": "₽",
+  "phone": "+7 (495) 225-49-90",
+  "booking": {
+    "type": "phone",
+    "value": "+7 (495) 225-49-90"
+  },
+  "address": "Москва, проспект Мира, 119с619",
+  "address_en": "119 bld 619 Prospekt Mira, Moscow",
+  "addressNote": "Территория ВДНХ",
+  "addressNote_en": "VDNKh park",
+  "hours": [
+    {
+      "days": "Ежедневно",
+      "days_en": "Daily",
+      "time": "10:00–22:00"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Закуски",
+      "title_en": "Antipasti",
+      "items": [
+        {
+          "name": "Ассорти брускетт",
+          "name_en": "Bruschetta selection",
+          "description": "Три вида: томаты с базиликом, лосось, паштет из куриной печени",
+          "description_en": "Three kinds: tomato & basil, salmon, chicken liver pâté",
+          "weight": "300 г",
+          "price": 940,
+          "tags": [
+            "hit"
+          ],
+          "_stub": "заглушка: вес",
+          "_source": "osteria-trio.ru (выдержка поиска)"
+        },
+        {
+          "name": "Вителло тоннато",
+          "name_en": "Vitello tonnato",
+          "description": "Тонкие ломтики телятины, тунцовый соус, каперсы",
+          "description_en": "Thin slices of veal, tuna sauce, capers",
+          "weight": "150 г",
+          "price": 890,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Карпаччо из говядины",
+          "name_en": "Beef carpaccio",
+          "description": "Руккола, пармезан, оливковое масло",
+          "description_en": "Arugula, parmesan, olive oil",
+          "weight": "120 г",
+          "price": 920,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Буррата с томатами",
+          "name_en": "Burrata with tomatoes",
+          "description": "Томаты черри, песто, бальзамик",
+          "description_en": "Cherry tomatoes, pesto, balsamic",
+          "weight": "220 г",
+          "price": 1150,
+          "tags": [
+            "veg"
+          ],
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Итальянская сырная тарелка",
+          "name_en": "Italian cheese board",
+          "description": "Пармезан, горгонзола, пекорино, мёд, орехи",
+          "description_en": "Parmesan, gorgonzola, pecorino, honey, nuts",
+          "weight": "200 г",
+          "price": 1290,
+          "tags": [
+            "veg"
+          ],
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Фокачча с розмарином",
+          "name_en": "Rosemary focaccia",
+          "weight": "180 г",
+          "price": 350,
+          "tags": [
+            "veg"
+          ],
+          "_stub": "заглушка: цена, вес"
+        }
+      ]
+    },
+    {
+      "title": "Салаты и супы",
+      "title_en": "Salads & soups",
+      "items": [
+        {
+          "name": "Цезарь с курицей",
+          "name_en": "Caesar salad with chicken",
+          "weight": "250 г",
+          "price": 790,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Цезарь с креветками",
+          "name_en": "Caesar salad with prawns",
+          "weight": "250 г",
+          "price": 990,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Капрезе",
+          "name_en": "Caprese",
+          "description": "Моцарелла, томаты, базилик",
+          "description_en": "Mozzarella, tomatoes, basil",
+          "weight": "230 г",
+          "price": 820,
+          "tags": [
+            "veg"
+          ],
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Тёплый салат с телятиной",
+          "name_en": "Warm veal salad",
+          "weight": "220 г",
+          "price": 950,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Минестроне",
+          "name_en": "Minestrone",
+          "weight": "300 мл",
+          "price": 490,
+          "tags": [
+            "veg"
+          ],
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Борщ по-кубански со смальцем",
+          "name_en": "Kuban-style borscht with lard spread",
+          "weight": "350 мл",
+          "price": 450,
+          "_stub": "заглушка: вес",
+          "_source": "osteria-trio.ru (выдержка поиска)"
+        }
+      ]
+    },
+    {
+      "title": "Паста и ризотто",
+      "title_en": "Pasta & risotto",
+      "items": [
+        {
+          "name": "Паста карбонара",
+          "name_en": "Spaghetti carbonara",
+          "description": "Гуанчиале, желток, пекорино романо",
+          "description_en": "Guanciale, egg yolk, pecorino romano",
+          "weight": "280 г",
+          "price": 570,
+          "tags": [
+            "hit"
+          ],
+          "_stub": "заглушка: вес",
+          "_source": "italyrestoran.ru (агрегатор)"
+        },
+        {
+          "name": "Паста болоньезе",
+          "name_en": "Tagliatelle bolognese",
+          "weight": "300 г",
+          "price": 690,
+          "_stub": "заглушка: цена, вес",
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+        },
+        {
+          "name": "Паста с морепродуктами",
+          "name_en": "Seafood linguine",
+          "description": "Креветки, мидии, кальмар, томаты черри",
+          "description_en": "Prawns, mussels, squid, cherry tomatoes",
+          "weight": "300 г",
+          "price": 1190,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Паста с лососем в сливочном соусе",
+          "name_en": "Salmon pasta in cream sauce",
+          "weight": "300 г",
+          "price": 890,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Ризотто с белыми грибами",
+          "name_en": "Porcini risotto",
+          "weight": "280 г",
+          "price": 820,
+          "tags": [
+            "veg"
+          ],
+          "_stub": "заглушка: цена, вес",
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+        },
+        {
+          "name": "Ризотто «4 сыра»",
+          "name_en": "Four cheese risotto",
+          "weight": "280 г",
+          "price": 750,
+          "tags": [
+            "veg"
+          ],
+          "_stub": "заглушка: вес",
+          "_source": "osteria-trio.ru (выдержка поиска)"
+        }
+      ]
+    },
+    {
+      "title": "Пицца",
+      "title_en": "Pizza",
+      "note": "Сырный бортик — +180 ₽",
+      "note_en": "Cheese-stuffed crust — +180 ₽",
+      "items": [
+        {
+          "name": "Маргарита",
+          "name_en": "Margherita",
+          "description": "Томатный соус, моцарелла, базилик",
+          "description_en": "Tomato sauce, mozzarella, basil",
+          "weight": "450 г",
+          "price": 600,
+          "tags": [
+            "veg"
+          ],
+          "_stub": "заглушка: вес",
+          "_source": "ostankino.su (агрегатор)"
+        },
+        {
+          "name": "Ветчина и грибы",
+          "name_en": "Ham & mushrooms",
+          "weight": "500 г",
+          "price": 750,
+          "_stub": "заглушка: вес",
+          "_source": "ostankino.su (агрегатор)"
+        },
+        {
+          "name": "Четыре сыра",
+          "name_en": "Quattro formaggi",
+          "description": "Моцарелла, горгонзола, пармезан, дор блю",
+          "description_en": "Mozzarella, gorgonzola, parmesan, dor blue",
+          "weight": "480 г",
+          "price": 870,
+          "tags": [
+            "veg"
+          ],
+          "_stub": "заглушка: вес",
+          "_source": "ostankino.su (агрегатор)"
+        },
+        {
+          "name": "Пепперони",
+          "name_en": "Pepperoni",
+          "weight": "470 г",
+          "price": 820,
+          "tags": [
+            "spicy"
+          ],
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Пицца с ростбифом и запечённым перцем",
+          "name_en": "Roast beef & roasted pepper pizza",
+          "weight": "520 г",
+          "price": 980,
+          "tags": [
+            "new"
+          ],
+          "_stub": "заглушка: цена, вес",
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+        },
+        {
+          "name": "Прошутто и руккола",
+          "name_en": "Prosciutto & arugula",
+          "weight": "470 г",
+          "price": 990,
+          "_stub": "заглушка: цена, вес"
+        }
+      ]
+    },
+    {
+      "title": "Горячее",
+      "title_en": "Mains",
+      "items": [
+        {
+          "name": "Филе индейки с соусом карри",
+          "name_en": "Turkey fillet with curry sauce",
+          "weight": "280 г",
+          "price": 1100,
+          "_stub": "заглушка: вес",
+          "_source": "osteria-trio.ru (выдержка поиска)"
+        },
+        {
+          "name": "Стейк рибай",
+          "name_en": "Ribeye steak",
+          "weight": "300 г",
+          "price": 2490,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Филе лосося на гриле",
+          "name_en": "Grilled salmon fillet",
+          "description": "Со шпинатом и лимонным соусом",
+          "description_en": "With spinach and lemon sauce",
+          "weight": "200 г",
+          "price": 1590,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Цыплёнок по-тоскански",
+          "name_en": "Tuscan-style chicken",
+          "weight": "320 г",
+          "price": 1050,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Запечённые овощи",
+          "name_en": "Roasted vegetables",
+          "weight": "200 г",
+          "price": 450,
+          "tags": [
+            "veg"
+          ],
+          "_stub": "заглушка: цена, вес",
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+        }
+      ]
+    },
+    {
+      "title": "Десерты",
+      "title_en": "Desserts",
+      "items": [
+        {
+          "name": "Тирамису",
+          "name_en": "Tiramisu",
+          "weight": "150 г",
+          "price": 550,
+          "tags": [
+            "hit"
+          ],
+          "_stub": "заглушка: цена, вес",
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+        },
+        {
+          "name": "Панна-котта",
+          "name_en": "Panna cotta",
+          "description": "С ягодным соусом",
+          "description_en": "With berry sauce",
+          "weight": "140 г",
+          "price": 450,
+          "_stub": "заглушка: цена, вес",
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+        },
+        {
+          "name": "Шоколадный фондан",
+          "name_en": "Chocolate fondant",
+          "description": "С шариком ванильного мороженого",
+          "description_en": "With a scoop of vanilla ice cream",
+          "weight": "130 г",
+          "price": 520,
+          "_stub": "заглушка: цена, вес",
+          "_source": "osteria-trio.ru (выдержка поиска) — блюдо; цена — заглушка"
+        },
+        {
+          "name": "Канноли с рикоттой",
+          "name_en": "Ricotta cannoli",
+          "weight": "110 г",
+          "price": 390,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Джелато, 2 шарика",
+          "name_en": "Gelato, 2 scoops",
+          "weight": "100 г",
+          "price": 350,
+          "_stub": "заглушка: цена, вес"
+        }
+      ]
+    },
+    {
+      "title": "Напитки",
+      "title_en": "Drinks",
+      "items": [
+        {
+          "name": "Эспрессо",
+          "name_en": "Espresso",
+          "weight": "30 мл",
+          "price": 220,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Капучино",
+          "name_en": "Cappuccino",
+          "variants": [
+            {
+              "name": "250 мл",
+              "price": 290
+            },
+            {
+              "name": "350 мл",
+              "price": 350
+            }
+          ],
+          "_stub": "заглушка: цена"
+        },
+        {
+          "name": "Кофе гляссе",
+          "name_en": "Iced coffee with ice cream",
+          "weight": "250 мл",
+          "price": 350,
+          "_stub": "заглушка: вес",
+          "_source": "osteria-trio.ru (выдержка поиска)"
+        },
+        {
+          "name": "Чай «Грушевый штрудель»",
+          "name_en": "Pear strudel tea",
+          "weight": "500 мл",
+          "price": 490,
+          "_stub": "заглушка: цена",
+          "_source": "osteria-trio.ru (выдержка поиска) — объём; цена — заглушка"
+        },
+        {
+          "name": "Лимонад «Сицилийский»",
+          "name_en": "Sicilian lemonade",
+          "weight": "400 мл",
+          "price": 450,
+          "_stub": "заглушка: цена, вес"
+        },
+        {
+          "name": "Krusovice Černé, разливное",
+          "name_en": "Krušovice Černé, draught",
+          "description": "Тёмное чешское пиво",
+          "description_en": "Czech dark lager",
+          "weight": "500 мл",
+          "price": 450,
+          "_stub": "заглушка: цена",
+          "_source": "osteria-trio.ru (выдержка поиска) — позиция; цена — заглушка"
+        }
+      ]
+    }
+  ]
+}
