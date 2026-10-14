@@ -230,5 +230,6 @@
   "address_en": "2A Kosmonavtov St, Moscow",
   "defaultLang": "ru",
   "accentColor": "#c08a5a",
-  "_accent_note": "фирменный коричневый pettina.ru (#553619), осветлён для тёмной темы"
+  "_accent_note": "фирменный коричневый pettina.ru (#553619), осветлён для тёмной темы",
+  "_order_note": "нет мессенджера: заказ показывается официанту; для отправки укажите orderVia + orderContact (WhatsApp/Telegram)"
 }

@@ -120,5 +120,8 @@
     }
   ],
   "accentColor": "#b35a7a",
-  "_accent_note": "светлый цветочный стиль: пыльно-розовый акцент"
+  "_accent_note": "светлый цветочный стиль: пыльно-розовый акцент",
+  "orderVia": "whatsapp",
+  "orderContact": "",
+  "_order_note": "впишите номер WhatsApp в orderContact — включится отправка заказа"
 }

@@ -223,5 +223,7 @@
   ],
   "tagline_en": "Italian restaurant near VDNKh",
   "address_en": "13A bld 1 Yaroslavskaya St, Moscow",
-  "defaultLang": "ru"
+  "defaultLang": "ru",
+  "orderVia": "whatsapp",
+  "orderContact": "+79856448877"
 }
