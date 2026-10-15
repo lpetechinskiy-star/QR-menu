@@ -310,6 +310,10 @@
     bar.setAttribute('aria-haspopup', 'dialog');
     doc.body.appendChild(bar);
     bar.addEventListener('click', function () { openSheet('cart'); });
+    var guard = doc.createElement('div');
+    guard.className = 'edge-guard';
+    guard.setAttribute('aria-hidden', 'true');
+    doc.body.appendChild(guard);
 
     function renderBar() {
       var t = totals();
