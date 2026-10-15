@@ -701,37 +701,38 @@ main {
 .stepper--soft { background: var(--chip); color: var(--text); }
 @keyframes qty-pop { 50% { transform: scale(1.08); } }
 
-/* Плавающая кнопка внизу */
-.cart-bar {
-  position: fixed;
-  left: 12px;
-  right: 12px;
-  bottom: calc(12px + env(safe-area-inset-bottom));
-  z-index: 30;
-  display: flex;
+/* «Мой выбор» — пилюля справа в липкой строке разделов */
+.nav { display: flex; align-items: center; }
+.nav__inner { flex: 1; min-width: 0; }
+.cart-pill {
+  display: inline-flex;
+  flex: none;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  max-width: 520px;
-  min-height: 58px;
-  margin: 0 auto;
-  padding: 0 22px;
+  gap: 6px;
+  height: 38px;
+  margin: 0 12px 0 2px;
+  padding: 0 14px 0 12px;
   border: 0;
-  border-radius: 18px;
+  border-radius: 999px;
   background: var(--accent);
   color: var(--accent-ink);
-  font: 650 16px/1.2 var(--font);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+  font: 700 14px/1 var(--font);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
   cursor: pointer;
-  opacity: 0;
-  transform: translateY(calc(100% + 30px));
-  pointer-events: none;
-  transition: transform .32s cubic-bezier(.2, .8, .2, 1), opacity .2s;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .16);
+  animation: pill-in .28s cubic-bezier(.2, .8, .2, 1);
 }
-.cart-bar.is-visible { opacity: 1; transform: none; pointer-events: auto; }
-.cart-bar:active { transform: scale(.98); }
-.cart-bar b { font-variant-numeric: tabular-nums; }
-body.has-cart { padding-bottom: 90px; }
+.cart-pill[hidden] { display: none; }
+.cart-pill .icon { width: 18px; height: 18px; }
+.cart-pill__sum { font-weight: 600; opacity: .92; }
+.cart-pill__sum::before { content: "·"; margin-right: 6px; opacity: .7; }
+.cart-pill.is-bump { animation: pill-bump .3s ease; }
+.cart-pill:active { transform: scale(.96); }
+.cart-pill--float { position: fixed; top: 12px; right: 0; z-index: 30; }
+@keyframes pill-in { from { opacity: 0; transform: scale(.7); } }
+@keyframes pill-bump { 40% { transform: scale(1.12); } }
+@media (max-width: 360px) { .cart-pill__sum { display: none; } }
 html.is-locked, html.is-locked body { overflow: hidden; }
 
 /* Нижний лист */
@@ -741,10 +742,11 @@ html.is-locked, html.is-locked body { overflow: hidden; }
   z-index: 40;
   background: rgba(0, 0, 0, .45);
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  transition: opacity .25s ease;
+  transition: opacity .25s ease, visibility 0s .25s;
 }
-.sheet-backdrop.is-open { opacity: 1; pointer-events: auto; }
+.sheet-backdrop.is-open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .25s ease; }
 
 .sheet {
   position: fixed;
@@ -884,9 +886,9 @@ html.is-locked, html.is-locked body { overflow: hidden; }
 .receipt__comment { margin: 10px 0 0; color: var(--muted); font-size: 16px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .cart-bar, .sheet, .sheet.is-open, .sheet-backdrop { transition: none; }
-  .stepper.is-bump { animation: none; }
+  .sheet, .sheet.is-open, .sheet-backdrop { transition: none; }
+  .stepper.is-bump, .cart-pill, .cart-pill.is-bump { animation: none; }
 }
 @media print {
-  .cart-bar, .sheet, .sheet-backdrop, .qty { display: none !important; }
+  .cart-pill, .sheet, .sheet-backdrop, .qty { display: none !important; }
 }
