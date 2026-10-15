@@ -303,30 +303,21 @@
       add(id, null);
     });
 
-    /* ---- Кнопка «Мой выбор» в верхней липкой строке с разделами ----
-       Не внизу экрана: в iOS Safari нижняя панель браузера полупрозрачная,
-       и плавающая кнопка под ней просвечивала цветной полосой. */
+    /* ---- Плавающая кнопка ---- */
     var bar = doc.createElement('button');
     bar.type = 'button';
-    bar.className = 'cart-pill';
-    bar.hidden = true;
+    bar.className = 'cart-bar';
     bar.setAttribute('aria-haspopup', 'dialog');
-    var navEl = doc.querySelector('.nav');
-    (navEl || doc.body).appendChild(bar);
-    if (!navEl) bar.classList.add('cart-pill--float');
+    doc.body.appendChild(bar);
     bar.addEventListener('click', function () { openSheet('cart'); });
-    var lastCount = -1;
 
     function renderBar() {
       var t = totals();
-      bar.innerHTML = '<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>' +
-        '<b>' + t.count + '</b><span class="cart-pill__sum">' + esc(money(t.sum)) + '</span>';
-      bar.setAttribute('aria-label', (isEn() ? 'My order: ' : 'Мой выбор: ') + t.count + ', ' + money(t.sum));
-      bar.hidden = t.count === 0;
-      if (t.count > lastCount && lastCount >= 0 && !bar.hidden) {
-        bar.classList.remove('is-bump'); void bar.offsetWidth; bar.classList.add('is-bump');
-      }
-      lastCount = t.count;
+      bar.innerHTML = '<span>' + both('Мой выбор', 'My order') + ' · <b>' + t.count + '</b></span><span>' + esc(money(t.sum)) + '</span>';
+      var visible = t.count > 0 && !sheetMode;
+      bar.classList.toggle('is-visible', visible);
+      bar.tabIndex = visible ? 0 : -1;
+      doc.body.classList.toggle('has-cart', t.count > 0);
     }
 
     /* ---- Нижний лист ---- */
