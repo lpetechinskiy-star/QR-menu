@@ -161,7 +161,6 @@
   function initCart(C) {
     var KEY = 'qrmenu-cart:' + C.slug;
     var TABLE_KEY = 'qrmenu-table:' + C.slug;
-    var PICKUPS = [10, 15, 20];
 
     function store(kind, key, value) {
       try {
@@ -212,12 +211,11 @@
     }
 
     /* Состояние: строки по порядку добавления; ключ строки = id блюда + номер варианта */
-    var state = { lines: [], comment: '', pickup: null };
+    var state = { lines: [], comment: '' };
     try {
       var saved = JSON.parse(store('local', KEY) || 'null');
       if (saved && Array.isArray(saved.lines)) {
         state.comment = typeof saved.comment === 'string' ? saved.comment.slice(0, 500) : '';
-        state.pickup = PICKUPS.indexOf(saved.pickup) >= 0 ? saved.pickup : null;
         saved.lines.forEach(function (l) {
           var d = dishes[l.id];
           var vOk = l.v === null ? !d || !d.variants : d && d.variants && d.variants[l.v];
@@ -410,10 +408,7 @@
 
       var where = table
         ? '<div class="field-label">' + both('Где вы', 'Where you are') + '</div><div class="table-chip">' + both('Стол ' + esc(table), 'Table ' + esc(table)) + '</div>'
-        : '<div class="field-label">' + both('Заберу через', 'I’ll pick it up in') + '</div><div class="seg" data-seg>' +
-          PICKUPS.map(function (m) {
-            return '<button type="button" data-pickup="' + m + '" aria-pressed="' + (state.pickup === m) + '">' + both(m + ' мин', m + ' min') + '</button>';
-          }).join('') + '</div><p class="hint-error" data-pickup-error hidden>' + both('Выберите, через сколько заберёте заказ', 'Choose when you’ll pick it up') + '</p>';
+        : '';
 
       sheet.innerHTML = head('Мой выбор', 'My order') +
         '<div class="sheet__body"><ul class="lines">' + lines + '</ul>' +
@@ -433,7 +428,7 @@
         var info = lineInfo(l);
         return '<li><span>' + esc(info.name) + (info.variant ? ', ' + esc(info.variant) : '') + ' × ' + l.q + '</span><b>' + esc(money(info.price * l.q)) + '</b></li>';
       }).join('');
-      return '<div class="receipt"><div class="receipt__where">' + esc(whereText()) + '</div><ul>' + rows + '</ul>' +
+      return '<div class="receipt">' + (table ? '<div class="receipt__where">' + esc(whereText()) + '</div>' : '') + '<ul>' + rows + '</ul>' +
         '<div class="receipt__total"><span>Итого</span><b>' + esc(money(t.sum)) + '</b></div>' +
         (state.comment ? '<p class="receipt__comment">' + esc(state.comment) + '</p>' : '') + '</div>';
     }
@@ -455,11 +450,13 @@
 
     function whereText() {
       if (table) return 'Стол ' + table;
-      return state.pickup ? 'С собой, заберу через ' + state.pickup + ' мин' : 'С собой';
+      return '';
     }
     function orderText() {
       var t = totals();
-      var out = ['Заказ — ' + C.name, whereText(), ''];
+      var out = ['Заказ — ' + C.name];
+      if (whereText()) out.push(whereText());
+      out.push('');
       state.lines.forEach(function (l) {
         var info = lineInfo(l);
         out.push('• ' + info.name + (info.variant ? ' (' + info.variant + ')' : '') + ' × ' + l.q + ' — ' + money(info.price * l.q));
@@ -472,7 +469,6 @@
       return {
         cafe: C.slug,
         table: table,
-        pickupMinutes: table ? null : state.pickup,
         items: state.lines.map(function (l) {
           var info = lineInfo(l);
           return { id: l.id, name: info.name, variant: info.variant || null, price: info.price, qty: l.q, sum: info.price * l.q };
@@ -495,13 +491,6 @@
     }
 
     function checkout() {
-      if (!table && !state.pickup) {
-        var seg = sheet.querySelector('[data-seg]');
-        var err = sheet.querySelector('[data-pickup-error]');
-        if (seg) { seg.classList.remove('is-error'); void seg.offsetWidth; seg.classList.add('is-error'); seg.scrollIntoView({ block: 'center', behavior: 'smooth' }); }
-        if (err) err.hidden = false;
-        return;
-      }
       if (C.endpoint) {
         var btn = sheet.querySelector('[data-checkout]');
         if (btn) { btn.disabled = true; btn.innerHTML = both('Отправляем…', 'Sending…'); }
@@ -534,11 +523,6 @@
         if (!totals().count) closeSheet();
         return;
       }
-      if (b.hasAttribute('data-pickup')) {
-        state.pickup = Number(b.getAttribute('data-pickup'));
-        save();
-        return renderCart();
-      }
       if (b.hasAttribute('data-clear')) {
         state.lines = []; state.comment = ''; view = 'list';
         changed(null);
@@ -548,7 +532,7 @@
       if (b.hasAttribute('data-back')) { view = 'list'; return renderCart(); }
       if (b.hasAttribute('data-reopen')) return openChat();
       if (b.hasAttribute('data-done')) {
-        state.lines = []; state.comment = ''; state.pickup = null; view = 'list';
+        state.lines = []; state.comment = ''; view = 'list';
         changed(null);
         return closeSheet();
       }

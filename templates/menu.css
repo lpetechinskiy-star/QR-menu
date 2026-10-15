@@ -840,21 +840,6 @@ html.is-locked, html.is-locked body { overflow: hidden; }
 }
 .comment:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 
-.seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-.seg button {
-  height: 46px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--bg);
-  color: var(--text);
-  font: 650 15px/1 var(--font);
-  cursor: pointer;
-  transition: background-color .15s, color .15s;
-}
-.seg button[aria-pressed="true"] { border-color: transparent; background: var(--accent); color: var(--accent-ink); }
-.seg.is-error button { border-color: var(--red); }
-.seg.is-error { animation: seg-shake .35s ease; }
-@keyframes seg-shake { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 .hint-error { margin: 8px 0 0; color: var(--red); font-size: 14px; }
 
 .table-chip {
@@ -900,7 +885,7 @@ html.is-locked, html.is-locked body { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) {
   .cart-bar, .sheet, .sheet.is-open, .sheet-backdrop { transition: none; }
-  .stepper.is-bump, .seg.is-error { animation: none; }
+  .stepper.is-bump { animation: none; }
 }
 @media print {
   .cart-bar, .sheet, .sheet-backdrop, .qty { display: none !important; }
